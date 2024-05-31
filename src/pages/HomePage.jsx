@@ -1,6 +1,10 @@
+import React from "react"
+import Header from "../components/Header"
 
 export default function HomePage(){
     return(
-        <h1>duda</h1>
+        <div style={{width: "100%", height: "100vh", background: "black"}}>
+            <Header/>
+        </div>
     )
 }
