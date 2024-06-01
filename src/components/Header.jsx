@@ -1,17 +1,3 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
 import { Fragment, useState } from "react";
 import {
   Dialog,
@@ -39,12 +25,12 @@ import logo from "../assets/f1logo.png";
 const navigation = {
   pages: [
     { name: "Home", href: "#" },
-    { name: "Schedule", href: "#" },
+    { name: "Results", href: "#" },
   ],
   categories: [
     {
-      id: "constructors",
-      name: "Constructors",
+      id: "drivers",
+      name: "Drivers",
       featured: [
         {
           name: "New Arrivals",
@@ -105,8 +91,8 @@ const navigation = {
       ],
     },
     {
-      id: "drivers",
-      name: "Drivers",
+      id: "teams",
+      name: "Teams",
       featured: [
         {
           name: "New Arrivals",
@@ -163,8 +149,7 @@ const navigation = {
         },
       ],
     },
-  ],
-  page: [{ name: "კონტაქტი", href: "#" }],
+  ]
 };
 
 function classNames(...classes) {
@@ -175,7 +160,7 @@ export default function Example() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="bg-white" style={{ fontFamily: "tkt" }}>
+    <div className="bg-white" style={{ fontFamily: "TitilliumWeb-Regular" }}>
       {/* Mobile menu */}
       <Transition show={open}>
         <Dialog className="relative z-40 lg:hidden" onClose={setOpen}>
@@ -312,7 +297,7 @@ export default function Example() {
                   </TabPanels>
                 </TabGroup>
 
-                <div className="space-y-6 border-t border-gray-200 px-4 py-6">
+                {/* <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   {navigation.page.map((page) => (
                     <div key={page.name} className="flow-root">
                       <a
@@ -323,7 +308,7 @@ export default function Example() {
                       </a>
                     </div>
                   ))}
-                </div>
+                </div> */}
 
                 <div className="border-t border-gray-200 px-4 py-6">
                   <a href="#" className="-m-2 flex items-center p-2">
@@ -344,18 +329,14 @@ export default function Example() {
         </Dialog>
       </Transition>
 
-      <header className="relative bg-white">
-        <p className="flex h-10 items-center justify-center bg-customBlue px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
-          Get free delivery on orders over $100
-        </p>
-
+      <header className="relative bg-white py-2">
         <nav
           aria-label="Top"
           className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
-          style={{ position: "relative", zIndex: "30" }}
+          style={{ position: "relative", zIndex: "30"}}
         >
-          <div className="border-b border-gray-200">
-            <div className="flex h-16 items-center">
+          <div>
+            <div className="flex h-16 items-center gap-8">
               <button
                 type="button"
                 className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden"
@@ -370,21 +351,21 @@ export default function Example() {
               <div className="ml-4 flex lg:ml-0">
                 <a href="#">
                   <span className="sr-only">Your Company</span>
-                  <img className="h-6 w-auto" src={logo} alt="" />
+                  <img className="h-7 w-auto" src={logo} alt="" />
                 </a>
               </div>
 
               {/* Flyout menus */}
               <PopoverGroup
                 className="hidden lg:ml-8 lg:block lg:self-stretch"
-                style={{ fontFamily: "tkt" }}
+                style={{ fontFamily: "TitilliumWeb-SemiBold" }}
               >
-                <div className="flex h-full space-x-8">
+                <div className="flex gap-4 h-full space-x-8">
                   {navigation.pages.map((page) => (
                     <a
                       key={page.name}
                       href={page.href}
-                      className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                      className="flex items-center text-md font-medium text-black hover:text-custom-red"
                     >
                       {page.name}
                     </a>
@@ -397,9 +378,9 @@ export default function Example() {
                             <PopoverButton
                               className={classNames(
                                 open
-                                  ? "border-indigo-600 text-indigo-600"
-                                  : "border-transparent text-gray-700 hover:text-gray-800",
-                                "relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out"
+                                  ? "border-white text-custom-red"
+                                  : "border-transparent text-black hover:text-custom-red",
+                                "relative z-10 -mb-px flex items-center border-b-2 pt-px text-md font-medium transition-colors duration-200 ease-out"
                               )}
                             >
                               {category.name}
@@ -477,7 +458,7 @@ export default function Example() {
                                               >
                                                 <a
                                                   href={item.href}
-                                                  className="hover:text-gray-800"
+                                                  className="hover:text-custom-red"
                                                 >
                                                   {item.name}
                                                 </a>
@@ -497,15 +478,15 @@ export default function Example() {
                     </Popover>
                   ))}
 
-                  {navigation.page.map((page) => (
+                  {/* {navigation.page.map((page) => (
                     <a
                       key={page.name}
                       href={page.href}
-                      className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                      className="flex items-center text-sm font-medium text-black hover:text-gray-800"
                     >
                       {page.name}
                     </a>
-                  ))}
+                  ))} */}
                 </div>
               </PopoverGroup>
 
@@ -520,7 +501,7 @@ export default function Example() {
                       alt=""
                       className="block h-auto w-5 flex-shrink-0"
                     />
-                    <span className="ml-3 block text-sm font-medium">ENG</span>
+                    <button className="ml-3 block text-sm font-medium">ENG</button>
                     <span className="sr-only">, change langauge</span>
                   </a>
                 </div>
