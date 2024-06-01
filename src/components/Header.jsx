@@ -20,8 +20,9 @@ import {
   ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import "./Header.css";
 import logo from "../assets/images/f1logo.png";
-  import arrow from "../assets/images/arrow-drop-down-line.svg";
+import arrow from "../assets/images/arrow-drop-down-line.svg";
 
 const navigation = {
   pages: [
@@ -399,7 +400,6 @@ export default function Example() {
                                 <path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z" />
                               </svg>
                             </PopoverButton>
-                            
                           </div>
 
                           <Transition
@@ -516,9 +516,13 @@ export default function Example() {
                       alt=""
                       className="block h-auto w-5 flex-shrink-0"
                     />
-                    <button className="ml-3 block text-sm font-medium">
-                      ENG
+                    <button class="ml-3 inline-block text-sm font-medium bg-custom-black text-white py-2 px-4 rounded">
+                      SIGN IN
                     </button>
+                    <button class="ml-3 inline-block text-sm font-medium bg-custom-red text-white py-2 px-4 rounded">
+                      SUBSCRIBE
+                    </button>
+
                     <span className="sr-only">, change langauge</span>
                   </a>
                 </div>

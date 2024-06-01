@@ -25,16 +25,3 @@
   font-style: normal;
 }
 
-/* This style will ensure that the border is not shown when the button is focused */
-button:focus,
-button:active {
-  outline: none; /* Removes the default outline */
-  border: none; /* Ensures no border is shown */
-}
-
-/* Optionally, you can target the specific class applied by PopoverButton */
-.PopoverButton:focus,
-.PopoverButton:active {
-  outline: none;
-  border: none;
-}
