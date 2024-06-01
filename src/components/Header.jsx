@@ -29,6 +29,12 @@ import redbull from "../assets/images/bolids/red-bull.png";
 import astonmartin from "../assets/images/bolids/aston-martin.png";
 import ferrari from "../assets/images/bolids/ferrari.png";
 import williams from "../assets/images/bolids/williams.png";
+import mclaren from "../assets/images/bolids/mclaren.png";
+import mercedes from "../assets/images/bolids/mercedes.png";
+import rb from "../assets/images/bolids/rb.png";
+import kickSauber from "../assets/images/bolids/kick-sauber.png";
+import haas from "../assets/images/bolids/haas.png";
+import alpine from "../assets/images/bolids/alpine.png";
 
 const navigation = {
   pages: [
@@ -108,22 +114,22 @@ const navigation = {
       sections: [
         {
           items: [
-            { name: "Alpine", href: "#", imageSrc: redbull },
+            { name: "Alpine", href: "#", imageSrc: alpine },
             { name: "Aston Martin", href: "#", imageSrc: astonmartin },
             { name: "Ferrari", href: "#", imageSrc: ferrari },
-            { name: "Haas", href: "#", imageSrc: redbull },
+            { name: "Haas", href: "#", imageSrc: haas },
           ],
         },
         {
           items: [
-            { name: "Kick Sauber", href: "#", imageSrc: redbull },
-            { name: "McLaren", href: "#", imageSrc: redbull },
-            { name: "Mercedes", href: "#", imageSrc: redbull },
+            { name: "Kick Sauber", href: "#", imageSrc: kickSauber },
+            { name: "McLaren", href: "#", imageSrc: mclaren },
+            { name: "Mercedes", href: "#", imageSrc: mercedes },
           ],
         },
         {
           items: [
-            { name: "RB", href: "#", imageSrc: redbull  },
+            { name: "RB", href: "#", imageSrc: rb  },
             { name: "Red Bull Racing", href: "#", imageSrc: redbull  },
             { name: "Williams", href: "#", imageSrc: williams  },
           ],
