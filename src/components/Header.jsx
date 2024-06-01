@@ -35,8 +35,8 @@ import rb from "../assets/images/bolids/rb.png";
 import kickSauber from "../assets/images/bolids/kick-sauber.png";
 import haas from "../assets/images/bolids/haas.png";
 import alpine from "../assets/images/bolids/alpine.png";
-import team from "../assets/images/teams.png"
-import team2 from "../assets/images/teams2.jpg"
+import team from "../assets/images/teams.png";
+import team2 from "../assets/images/teams2.jpg";
 
 const navigation = {
   pages: [
@@ -97,14 +97,12 @@ const navigation = {
       name: "Teams",
       featured: [
         {
-          imageSrc:team,
-          imageAlt:
-            "f1 teams",
+          imageSrc: team,
+          imageAlt: "f1 teams",
         },
         {
-          imageSrc:team2,
-          imageAlt:
-            "f1 teams",
+          imageSrc: team2,
+          imageAlt: "f1 teams",
         },
       ],
       sections: [
@@ -125,9 +123,9 @@ const navigation = {
         },
         {
           items: [
-            { name: "RB", href: "#", imageSrc: rb  },
-            { name: "Red Bull Racing", href: "#", imageSrc: redbull  },
-            { name: "Williams", href: "#", imageSrc: williams  },
+            { name: "RB", href: "#", imageSrc: rb },
+            { name: "Red Bull Racing", href: "#", imageSrc: redbull },
+            { name: "Williams", href: "#", imageSrc: williams },
           ],
         },
       ],
@@ -256,19 +254,30 @@ export default function Example() {
                             >
                               {section.items.map((item) => (
                                 <li key={item.name} className="flow-root">
-                                  <div className="flex items-center">
-                                    <div
-                                      className="w-1 h-4 mr-2"
-                                      style={{
-                                        backgroundColor: item.color,
-                                      }}
-                                    ></div>
-                                    <a
-                                      href={item.href}
-                                      className="-m-2 block p-2 text-black"
-                                    >
-                                      {item.name}
-                                    </a>
+                                  <div className="flex flex-col">
+                                    <div className="flex items-center">
+                                      <div
+                                        className="w-1 h-4 mr-2"
+                                        style={{
+                                          backgroundColor: item.color,
+                                        }}
+                                      ></div>
+                                      <a
+                                        href={item.href}
+                                        className="-m-2 block p-2 text-black"
+                                      >
+                                        {item.name}
+                                      </a>
+                                    </div>
+                                    {/* Team logo */}
+
+                                    {item.imageSrc && (
+                                      <img
+                                        src={item.imageSrc}
+                                        alt={item.name}
+                                        className="w-15 h-auto mt-4"
+                                      />
+                                    )}
                                   </div>
                                 </li>
                               ))}
@@ -453,7 +462,7 @@ export default function Example() {
                                                     {item.name}
                                                   </a>
                                                   {/* Team logo */}
-                                        
+
                                                   {item.imageSrc && (
                                                     <img
                                                       src={item.imageSrc}
