@@ -53,41 +53,35 @@ const navigation = {
       ],
       sections: [
         {
-          id: "clothing",
-          name: "Clothing",
           items: [
-            { name: "Tops", href: "#" },
-            { name: "Dresses", href: "#" },
-            { name: "Pants", href: "#" },
-            { name: "Denim", href: "#" },
-            { name: "Sweaters", href: "#" },
-            { name: "T-Shirts", href: "#" },
-            { name: "Jackets", href: "#" },
-            { name: "Activewear", href: "#" },
-            { name: "Browse All", href: "#" },
+            { name: "Alexander Albon", href: "#" },
+            { name: "Fernando Alonso", href: "#" },
+            { name: "Valtteri Bottas", href: "#" },
+            { name: "Pierre Gasly", href: "#" },
+            { name: "Lewis Hamilton", href: "#" },
+            { name: "Nico Hulkenberg", href: "#" },
+            { name: "Charles Leclerc", href: "#" },
           ],
         },
         {
-          id: "accessories",
-          name: "Accessories",
           items: [
-            { name: "Watches", href: "#" },
-            { name: "Wallets", href: "#" },
-            { name: "Bags", href: "#" },
-            { name: "Sunglasses", href: "#" },
-            { name: "Hats", href: "#" },
-            { name: "Belts", href: "#" },
+            { name: "Kevin Magnussen", href: "#" },
+            { name: "Lando Norris", href: "#" },
+            { name: "Esteban Ocon", href: "#" },
+            { name: "Sergio Perez", href: "#" },
+            { name: "Oscar Piastri", href: "#" },
+            { name: "Daniel Ricciardo", href: "#" },
+            { name: "George Russell", href: "#" },
           ],
         },
         {
-          id: "brands",
-          name: "Brands",
           items: [
-            { name: "Full Nelson", href: "#" },
-            { name: "My Way", href: "#" },
-            { name: "Re-Arranged", href: "#" },
-            { name: "Counterfeit", href: "#" },
-            { name: "Significant Other", href: "#" },
+            { name: "Carlos Sainz", href: "#" },
+            { name: "Logan Sargeant", href: "#" },
+            { name: "Lance Stroll", href: "#" },
+            { name: "Yuki Tsunoda", href: "#" },
+            { name: "Max Verstappen", href: "#" },
+            { name: "Zhou Guanyu", href: "#" },
           ],
         },
       ],
@@ -270,12 +264,6 @@ export default function Example() {
                         </div>
                         {category.sections.map((section) => (
                           <div key={section.name}>
-                            <p
-                              id={`${category.id}-${section.id}-heading-mobile`}
-                              className="font-medium text-gray-900"
-                            >
-                              {section.name}
-                            </p>
                             <ul
                               role="list"
                               aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
@@ -410,7 +398,7 @@ export default function Example() {
                             leaveFrom="opacity-100"
                             leaveTo="opacity-0"
                           >
-                            <PopoverPanel className="absolute inset-x-0 top-full text-sm text-gray-500">
+                            <PopoverPanel className="absolute inset-x-0 top-full text-sm text-black">
                               {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
                               <div
                                 className="absolute inset-0 top-1/2 bg-white shadow"
@@ -452,19 +440,13 @@ export default function Example() {
                                         </div>
                                       ))}
                                     </div>
-                                    <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
+                                    <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm" >
                                       {category.sections.map((section) => (
                                         <div key={section.name}>
-                                          <p
-                                            id={`${section.name}-heading`}
-                                            className="font-medium text-gray-900"
-                                          >
-                                            {section.name}
-                                          </p>
                                           <ul
                                             role="list"
                                             aria-labelledby={`${section.name}-heading`}
-                                            className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
+                                            className="mt-0 space-y-6 sm:mt-0 sm:space-y-4"
                                           >
                                             {section.items.map((item) => (
                                               <li
