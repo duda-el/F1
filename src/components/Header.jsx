@@ -35,6 +35,8 @@ import rb from "../assets/images/bolids/rb.png";
 import kickSauber from "../assets/images/bolids/kick-sauber.png";
 import haas from "../assets/images/bolids/haas.png";
 import alpine from "../assets/images/bolids/alpine.png";
+import team from "../assets/images/teams.png"
+import team2 from "../assets/images/teams2.jpg"
 
 const navigation = {
   pages: [
@@ -95,20 +97,14 @@ const navigation = {
       name: "Teams",
       featured: [
         {
-          name: "New Arrivals",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg",
+          imageSrc:team,
           imageAlt:
-            "Drawstring top with elastic loop closure and textured interior padding.",
+            "f1 teams",
         },
         {
-          name: "Artwork Tees",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg",
+          imageSrc:team2,
           imageAlt:
-            "Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.",
+            "f1 teams",
         },
       ],
       sections: [
