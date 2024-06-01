@@ -25,6 +25,10 @@ import logo from "../assets/images/f1logo.png";
 import arrow from "../assets/images/arrow-drop-down-line.svg";
 import f1drivers from "../assets/images/F1-drivers.jpg";
 import cars from "../assets/images/cars.jpg";
+import redbull from "../assets/images/bolids/red-bull.png";
+import astonmartin from "../assets/images/bolids/aston-martin.png";
+import ferrari from "../assets/images/bolids/ferrari.png";
+import williams from "../assets/images/bolids/williams.png";
 
 const navigation = {
   pages: [
@@ -103,38 +107,25 @@ const navigation = {
       ],
       sections: [
         {
-          id: "clothing",
-          name: "Clothing",
           items: [
-            { name: "Tops", href: "#" },
-            { name: "Pants", href: "#" },
-            { name: "Sweaters", href: "#" },
-            { name: "T-Shirts", href: "#" },
-            { name: "Jackets", href: "#" },
-            { name: "Activewear", href: "#" },
-            { name: "Browse All", href: "#" },
+            { name: "Alpine", href: "#", imageSrc: redbull },
+            { name: "Aston Martin", href: "#", imageSrc: astonmartin },
+            { name: "Ferrari", href: "#", imageSrc: ferrari },
+            { name: "Haas", href: "#", imageSrc: redbull },
           ],
         },
         {
-          id: "accessories",
-          name: "Accessories",
           items: [
-            { name: "Watches", href: "#" },
-            { name: "Wallets", href: "#" },
-            { name: "Bags", href: "#" },
-            { name: "Sunglasses", href: "#" },
-            { name: "Hats", href: "#" },
-            { name: "Belts", href: "#" },
+            { name: "Kick Sauber", href: "#", imageSrc: redbull },
+            { name: "McLaren", href: "#", imageSrc: redbull },
+            { name: "Mercedes", href: "#", imageSrc: redbull },
           ],
         },
         {
-          id: "brands",
-          name: "Brands",
           items: [
-            { name: "Re-Arranged", href: "#" },
-            { name: "Counterfeit", href: "#" },
-            { name: "Full Nelson", href: "#" },
-            { name: "My Way", href: "#" },
+            { name: "RB", href: "#", imageSrc: redbull  },
+            { name: "Red Bull Racing", href: "#", imageSrc: redbull  },
+            { name: "Williams", href: "#", imageSrc: williams  },
           ],
         },
       ],
@@ -221,12 +212,12 @@ export default function Example() {
                       ))}
                     </TabList>
                   </div>
-                  <TabPanels as={Fragment} >
+                  <TabPanels as={Fragment}>
                     {navigation.categories.map((category) => (
                       <TabPanel
                         key={category.name}
                         className="px-4 pb-8"
-                        style={{fontFamily: "TitilliumWeb-SemiBold"}}
+                        style={{ fontFamily: "TitilliumWeb-SemiBold" }}
                       >
                         <div className="grid grid-cols-2 gap-x-4">
                           {category.featured.map((item) => (
@@ -444,17 +435,31 @@ export default function Example() {
                                                 key={item.name}
                                                 className="flex items-center"
                                               >
-                                                {/* Colored box */}
+                                                {/* Color box */}
                                                 <div
                                                   className="w-1 h-4 mr-2"
                                                   style={{
                                                     backgroundColor: item.color,
                                                   }}
                                                 ></div>
-                                                {/* Driver's name */}
-                                                <a href={item.href}>
-                                                  {item.name}
-                                                </a>
+                                                <div className="flex flex-col">
+                                                  {/* Team name */}
+                                                  <a
+                                                    href={item.href}
+                                                    className="text-black"
+                                                  >
+                                                    {item.name}
+                                                  </a>
+                                                  {/* Team logo */}
+                                        
+                                                  {item.imageSrc && (
+                                                    <img
+                                                      src={item.imageSrc}
+                                                      alt={item.name}
+                                                      className="w-21 h-auto mt-4"
+                                                    />
+                                                  )}
+                                                </div>
                                               </li>
                                             ))}
                                           </ul>
