@@ -20,7 +20,8 @@ import {
   ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import logo from "../assets/f1logo.png";
+import logo from "../assets/images/f1logo.png";
+  import arrow from "../assets/images/arrow-drop-down-line.svg";
 
 const navigation = {
   pages: [
@@ -149,7 +150,7 @@ const navigation = {
         },
       ],
     },
-  ]
+  ],
 };
 
 function classNames(...classes) {
@@ -333,7 +334,7 @@ export default function Example() {
         <nav
           aria-label="Top"
           className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
-          style={{ position: "relative", zIndex: "30"}}
+          style={{ position: "relative", zIndex: "30" }}
         >
           <div>
             <div className="flex h-16 items-center gap-8">
@@ -360,14 +361,19 @@ export default function Example() {
                 className="hidden lg:ml-8 lg:block lg:self-stretch"
                 style={{ fontFamily: "TitilliumWeb-SemiBold" }}
               >
-                <div className="flex gap-4 h-full space-x-8">
+                <div className="flex h-full space-x-8">
                   {navigation.pages.map((page) => (
                     <a
                       key={page.name}
                       href={page.href}
                       className="flex items-center text-md font-medium text-black hover:text-custom-red"
                     >
-                      {page.name}
+                      {page.name}{" "}
+                      <img
+                        src={arrow}
+                        alt="dropdown"
+                        className="ml-1 w-6 h-auto opacity-0"
+                      />
                     </a>
                   ))}
                   {navigation.categories.map((category) => (
@@ -383,8 +389,17 @@ export default function Example() {
                                 "relative z-10 -mb-px flex items-center border-b-2 pt-px text-md font-medium transition-colors duration-200 ease-out"
                               )}
                             >
-                              {category.name}
+                              {category.name}{" "}
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill={open ? "#FF0000" : "currentColor"} // Change color on active state
+                                className="ml-1 w-6 h-auto transition-colors duration-200 ease-out" // Add transition for color change
+                              >
+                                <path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z" />
+                              </svg>
                             </PopoverButton>
+                            
                           </div>
 
                           <Transition
@@ -501,7 +516,9 @@ export default function Example() {
                       alt=""
                       className="block h-auto w-5 flex-shrink-0"
                     />
-                    <button className="ml-3 block text-sm font-medium">ENG</button>
+                    <button className="ml-3 block text-sm font-medium">
+                      ENG
+                    </button>
                     <span className="sr-only">, change langauge</span>
                   </a>
                 </div>
