@@ -450,7 +450,6 @@ export default function Example() {
                                                 {/* Driver's name */}
                                                 <a
                                                   href={item.href}
-                                                  className="hover:text-custom-red"
                                                 >
                                                   {item.name}
                                                 </a>
