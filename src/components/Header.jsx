@@ -23,6 +23,8 @@ import {
 import "./Header.css";
 import logo from "../assets/images/f1logo.png";
 import arrow from "../assets/images/arrow-drop-down-line.svg";
+import f1drivers from "../assets/images/F1-drivers.jpg"
+import cars from "../assets/images/cars.jpg"
 
 const navigation = {
   pages: [
@@ -35,53 +37,47 @@ const navigation = {
       name: "Drivers",
       featured: [
         {
-          name: "New Arrivals",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg",
+          imageSrc:f1drivers,
           imageAlt:
-            "Models sitting back to back, wearing Basic Tee in black and bone.",
+            "f1 drivers",
         },
         {
-          name: "Basic Tees",
-          href: "#",
-          imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg",
+          imageSrc:cars,
           imageAlt:
-            "Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.",
+            "f1 drivers contract",
         },
       ],
       sections: [
         {
           items: [
-            { name: "Alexander Albon", href: "#", color: "#E10600" },
-            { name: "Fernando Alonso", href: "#", color: "#E10600" },
-            { name: "Valtteri Bottas", href: "#", color: "#E10600" },
-            { name: "Pierre Gasly", href: "#", color: "#E10600" },
-            { name: "Lewis Hamilton", href: "#", color: "#E10600" },
-            { name: "Nico Hulkenberg", href: "#", color: "#E10600" },
-            { name: "Charles Leclerc", href: "#", color: "#E10600" },
+            { name: "Alexander Albon", href: "#", color: "#64C4FF" },
+            { name: "Fernando Alonso", href: "#", color: "#229971" },
+            { name: "Valtteri Bottas", href: "#", color: "#52E252" },
+            { name: "Pierre Gasly", href: "#", color: "#0093CC" },
+            { name: "Lewis Hamilton", href: "#", color: "#27F4D2" },
+            { name: "Nico Hulkenberg", href: "#", color: "#B6BABD" },
+            { name: "Charles Leclerc", href: "#", color: "#E80020" },
           ],
         },
         {
           items: [
-            { name: "Kevin Magnussen", href: "#", color: "#E10600" },
-            { name: "Lando Norris", href: "#", color: "#E10600" },
-            { name: "Esteban Ocon", href: "#", color: "#E10600" },
-            { name: "Sergio Perez", href: "#", color: "#E10600" },
-            { name: "Oscar Piastri", href: "#", color: "#E10600" },
-            { name: "Daniel Ricciardo", href: "#", color: "#E10600" },
-            { name: "George Russell", href: "#", color: "#E10600" },
+            { name: "Kevin Magnussen", href: "#", color: "#B6BABD" },
+            { name: "Lando Norris", href: "#", color: "#FF8000" },
+            { name: "Esteban Ocon", href: "#", color: "#0093CC" },
+            { name: "Sergio Perez", href: "#", color: "#3671C6" },
+            { name: "Oscar Piastri", href: "#", color: "#FF8000" },
+            { name: "Daniel Ricciardo", href: "#", color: "#6692FF" },
+            { name: "George Russell", href: "#", color: "#27F4D2" },
           ],
         },
         {
           items: [
-            { name: "Carlos Sainz", href: "#", color: "#E10600" },
-            { name: "Logan Sargeant", href: "#", color: "#E10600" },
-            { name: "Lance Stroll", href: "#", color: "#E10600" },
-            { name: "Yuki Tsunoda", href: "#", color: "#E10600" },
-            { name: "Max Verstappen", href: "#", color: "#E10600" },
-            { name: "Zhou Guanyu", href: "#", color: "#E10600" },
+            { name: "Carlos Sainz", href: "#", color: "#E80020" },
+            { name: "Logan Sargeant", href: "#", color: "#64C4FF" },
+            { name: "Lance Stroll", href: "#", color: "#229971" },
+            { name: "Yuki Tsunoda", href: "#", color: "#6692FF" },
+            { name: "Max Verstappen", href: "#", color: "#3671C6" },
+            { name: "Zhou Guanyu", href: "#", color: "#52E252" },
           ],
         },
       ],
@@ -256,9 +252,6 @@ export default function Example() {
                                 />
                                 {item.name}
                               </a>
-                              <p aria-hidden="true" className="mt-1">
-                                Shop now
-                              </p>
                             </div>
                           ))}
                         </div>
@@ -414,7 +407,7 @@ export default function Example() {
                                           key={item.name}
                                           className="group relative text-base sm:text-sm"
                                         >
-                                          <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
+                                          <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100">
                                             <img
                                               src={item.imageSrc}
                                               alt={item.imageAlt}
@@ -431,12 +424,6 @@ export default function Example() {
                                             />
                                             {item.name}
                                           </a>
-                                          <p
-                                            aria-hidden="true"
-                                            className="mt-1"
-                                          >
-                                            Shop now
-                                          </p>
                                         </div>
                                       ))}
                                     </div>
