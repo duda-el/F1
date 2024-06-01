@@ -23,8 +23,8 @@ import {
 import "./Header.css";
 import logo from "../assets/images/f1logo.png";
 import arrow from "../assets/images/arrow-drop-down-line.svg";
-import f1drivers from "../assets/images/F1-drivers.jpg"
-import cars from "../assets/images/cars.jpg"
+import f1drivers from "../assets/images/F1-drivers.jpg";
+import cars from "../assets/images/cars.jpg";
 
 const navigation = {
   pages: [
@@ -37,14 +37,12 @@ const navigation = {
       name: "Drivers",
       featured: [
         {
-          imageSrc:cars,
-          imageAlt:
-            "f1 drivers",
+          imageSrc: cars,
+          imageAlt: "f1 drivers",
         },
         {
-          imageSrc:f1drivers,
-          imageAlt:
-            "f1 drivers",
+          imageSrc: f1drivers,
+          imageAlt: "f1 drivers",
         },
       ],
       sections: [
@@ -212,7 +210,7 @@ export default function Example() {
                           className={({ selected }) =>
                             classNames(
                               selected
-                                ? "border-indigo-600 text-indigo-600"
+                                ? "border-custom-red text-custom-red"
                                 : "border-transparent text-gray-900",
                               "flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium"
                             )
@@ -223,11 +221,12 @@ export default function Example() {
                       ))}
                     </TabList>
                   </div>
-                  <TabPanels as={Fragment}>
+                  <TabPanels as={Fragment} >
                     {navigation.categories.map((category) => (
                       <TabPanel
                         key={category.name}
-                        className="space-y-10 px-4 pb-8 pt-10"
+                        className="px-4 pb-8"
+                        style={{fontFamily: "TitilliumWeb-SemiBold"}}
                       >
                         <div className="grid grid-cols-2 gap-x-4">
                           {category.featured.map((item) => (
@@ -235,13 +234,13 @@ export default function Example() {
                               key={item.name}
                               className="group relative text-sm"
                             >
-                              <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
+                              {/* <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
                                 <img
                                   src={item.imageSrc}
                                   alt={item.imageAlt}
                                   className="object-cover object-center"
                                 />
-                              </div>
+                              </div> */}
                               <a
                                 href={item.href}
                                 className="mt-6 block font-medium text-gray-900"
@@ -264,12 +263,20 @@ export default function Example() {
                             >
                               {section.items.map((item) => (
                                 <li key={item.name} className="flow-root">
-                                  <a
-                                    href={item.href}
-                                    className="-m-2 block p-2 text-gray-500"
-                                  >
-                                    {item.name}
-                                  </a>
+                                  <div className="flex items-center">
+                                    <div
+                                      className="w-1 h-4 mr-2"
+                                      style={{
+                                        backgroundColor: item.color,
+                                      }}
+                                    ></div>
+                                    <a
+                                      href={item.href}
+                                      className="-m-2 block p-2 text-black"
+                                    >
+                                      {item.name}
+                                    </a>
+                                  </div>
                                 </li>
                               ))}
                             </ul>
@@ -294,17 +301,14 @@ export default function Example() {
                 </div> */}
 
                 <div className="border-t border-gray-200 px-4 py-6">
-                  <a href="#" className="-m-2 flex items-center p-2">
-                    <img
-                      src="https://tailwindui.com/img/flags/flag-canada.svg"
-                      alt=""
-                      className="block h-auto w-5 flex-shrink-0"
-                    />
-                    <span className="ml-3 block text-base font-medium text-gray-900">
-                      CAD
-                    </span>
-                    <span className="sr-only">, change currency</span>
-                  </a>
+                  <div href="#" className="flex items-center">
+                    <button class="ml-3 inline-block text-sm font-medium bg-custom-black text-white py-2 px-4 rounded">
+                      SIGN IN
+                    </button>
+                    <button class="ml-3 inline-block text-sm font-medium bg-custom-red text-white py-2 px-4 rounded">
+                      SUBSCRIBE
+                    </button>
+                  </div>
                 </div>
               </DialogPanel>
             </TransitionChild>
@@ -448,9 +452,7 @@ export default function Example() {
                                                   }}
                                                 ></div>
                                                 {/* Driver's name */}
-                                                <a
-                                                  href={item.href}
-                                                >
+                                                <a href={item.href}>
                                                   {item.name}
                                                 </a>
                                               </li>
