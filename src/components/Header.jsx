@@ -54,34 +54,34 @@ const navigation = {
       sections: [
         {
           items: [
-            { name: "Alexander Albon", href: "#" },
-            { name: "Fernando Alonso", href: "#" },
-            { name: "Valtteri Bottas", href: "#" },
-            { name: "Pierre Gasly", href: "#" },
-            { name: "Lewis Hamilton", href: "#" },
-            { name: "Nico Hulkenberg", href: "#" },
-            { name: "Charles Leclerc", href: "#" },
+            { name: "Alexander Albon", href: "#", color: "#E10600" },
+            { name: "Fernando Alonso", href: "#", color: "#E10600" },
+            { name: "Valtteri Bottas", href: "#", color: "#E10600" },
+            { name: "Pierre Gasly", href: "#", color: "#E10600" },
+            { name: "Lewis Hamilton", href: "#", color: "#E10600" },
+            { name: "Nico Hulkenberg", href: "#", color: "#E10600" },
+            { name: "Charles Leclerc", href: "#", color: "#E10600" },
           ],
         },
         {
           items: [
-            { name: "Kevin Magnussen", href: "#" },
-            { name: "Lando Norris", href: "#" },
-            { name: "Esteban Ocon", href: "#" },
-            { name: "Sergio Perez", href: "#" },
-            { name: "Oscar Piastri", href: "#" },
-            { name: "Daniel Ricciardo", href: "#" },
-            { name: "George Russell", href: "#" },
+            { name: "Kevin Magnussen", href: "#", color: "#E10600" },
+            { name: "Lando Norris", href: "#", color: "#E10600" },
+            { name: "Esteban Ocon", href: "#", color: "#E10600" },
+            { name: "Sergio Perez", href: "#", color: "#E10600" },
+            { name: "Oscar Piastri", href: "#", color: "#E10600" },
+            { name: "Daniel Ricciardo", href: "#", color: "#E10600" },
+            { name: "George Russell", href: "#", color: "#E10600" },
           ],
         },
         {
           items: [
-            { name: "Carlos Sainz", href: "#" },
-            { name: "Logan Sargeant", href: "#" },
-            { name: "Lance Stroll", href: "#" },
-            { name: "Yuki Tsunoda", href: "#" },
-            { name: "Max Verstappen", href: "#" },
-            { name: "Zhou Guanyu", href: "#" },
+            { name: "Carlos Sainz", href: "#", color: "#E10600" },
+            { name: "Logan Sargeant", href: "#", color: "#E10600" },
+            { name: "Lance Stroll", href: "#", color: "#E10600" },
+            { name: "Yuki Tsunoda", href: "#", color: "#E10600" },
+            { name: "Max Verstappen", href: "#", color: "#E10600" },
+            { name: "Zhou Guanyu", href: "#", color: "#E10600" },
           ],
         },
       ],
@@ -440,7 +440,7 @@ export default function Example() {
                                         </div>
                                       ))}
                                     </div>
-                                    <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm" >
+                                    <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
                                       {category.sections.map((section) => (
                                         <div key={section.name}>
                                           <ul
@@ -451,8 +451,16 @@ export default function Example() {
                                             {section.items.map((item) => (
                                               <li
                                                 key={item.name}
-                                                className="flex"
+                                                className="flex items-center"
                                               >
+                                                {/* Colored box */}
+                                                <div
+                                                  className="w-1 h-4 mr-2"
+                                                  style={{
+                                                    backgroundColor: item.color,
+                                                  }}
+                                                ></div>
+                                                {/* Driver's name */}
                                                 <a
                                                   href={item.href}
                                                   className="hover:text-custom-red"
