@@ -37,6 +37,7 @@ import haas from "../assets/images/bolids/haas.png";
 import alpine from "../assets/images/bolids/alpine.png";
 import team from "../assets/images/teams.png";
 import team2 from "../assets/images/teams2.jpg";
+import SignInModal from "./Modal";
 
 const navigation = {
   pages: [
@@ -140,8 +141,17 @@ function classNames(...classes) {
 export default function Example() {
   const [open, setOpen] = useState(false);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <div className="bg-white" style={{ fontFamily: "TitilliumWeb-Regular" }}>
+      <div style={{zIndex: "1000", position: "absolute"}}>
+        <SignInModal isOpen={isModalOpen} onClose={closeModal} />
+      </div>
+
       {/* Mobile menu */}
       <Transition show={open}>
         <Dialog className="relative z-40 lg:hidden" onClose={setOpen}>
@@ -173,7 +183,6 @@ export default function Example() {
                     onClick={() => setOpen(false)}
                   >
                     <span className="absolute -inset-0.5" />
-                    <span className="sr-only">Close menu</span>
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                 </div>
@@ -304,7 +313,10 @@ export default function Example() {
 
                 <div className="border-t border-gray-200 px-4 py-6">
                   <div href="#" className="flex items-center">
-                    <button class="ml-3 inline-block text-sm font-medium bg-custom-black text-white py-2 px-4 rounded">
+                    <button
+                      className="ml-3 inline-block text-sm font-medium bg-custom-black text-white py-2 px-4 rounded"
+                      onClick={openModal}
+                    >
                       SIGN IN
                     </button>
                     <button class="ml-3 inline-block text-sm font-medium bg-custom-red text-white py-2 px-4 rounded">
@@ -318,7 +330,7 @@ export default function Example() {
         </Dialog>
       </Transition>
 
-      <header className="relative bg-white py-2">
+      <header className="relative bg-white py-2 border-b-2 border-b-custom-red">
         <nav
           aria-label="Top"
           className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
@@ -332,14 +344,12 @@ export default function Example() {
                 onClick={() => setOpen(true)}
               >
                 <span className="absolute -inset-0.5" />
-                <span className="sr-only">Open menu</span>
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
               </button>
 
               {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
                 <a href="#">
-                  <span className="sr-only">Your Company</span>
                   <img className="h-7 w-auto" src={logo} alt="" />
                 </a>
               </div>
@@ -404,7 +414,7 @@ export default function Example() {
                                 aria-hidden="true"
                               />
 
-                              <div className="relative bg-white">
+                              <div className="relative bg-custom-black mt-2">
                                 <div className="mx-auto max-w-7xl px-8">
                                   <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-16">
                                     <div className="col-start-2 grid grid-cols-2 gap-x-8">
@@ -457,7 +467,7 @@ export default function Example() {
                                                   {/* Team name */}
                                                   <a
                                                     href={item.href}
-                                                    className="text-black"
+                                                    className="text-white"
                                                   >
                                                     {item.name}
                                                   </a>
@@ -510,14 +520,16 @@ export default function Example() {
                       alt=""
                       className="block h-auto w-5 flex-shrink-0"
                     />
-                    <button class="ml-3 inline-block text-sm font-medium bg-custom-black text-white py-2 px-4 rounded">
+                    <button
+                      className="ml-3 inline-block text-sm font-medium bg-custom-black text-white py-2 px-4 rounded"
+                      onClick={openModal}
+                    >
                       SIGN IN
                     </button>
+
                     <button class="ml-3 inline-block text-sm font-medium bg-custom-red text-white py-2 px-4 rounded">
                       SUBSCRIBE
                     </button>
-
-                    <span className="sr-only">, change langauge</span>
                   </a>
                 </div>
               </div>
