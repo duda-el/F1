@@ -37,14 +37,14 @@ const navigation = {
       name: "Drivers",
       featured: [
         {
-          imageSrc:f1drivers,
+          imageSrc:cars,
           imageAlt:
             "f1 drivers",
         },
         {
-          imageSrc:cars,
+          imageSrc:f1drivers,
           imageAlt:
-            "f1 drivers contract",
+            "f1 drivers",
         },
       ],
       sections: [
