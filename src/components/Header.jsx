@@ -38,6 +38,7 @@ import alpine from "../assets/images/bolids/alpine.png";
 import team from "../assets/images/teams.png";
 import team2 from "../assets/images/teams2.jpg";
 import SignInModal from "./Modal";
+import RegistrationModal from "./RegistrationModal"
 
 const navigation = {
   pages: [
@@ -140,18 +141,32 @@ function classNames(...classes) {
 
 export default function Example() {
   const [open, setOpen] = useState(false);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isRegistrationOpen, setIsRegistrationOpen] = useState(false); // State for the registration modal
 
-  const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  const openRegistrationModal = () => {
+    if (isModalOpen) {
+      closeModal();
+    }
+    setIsRegistrationOpen(true);
+  };
+
+  const openModal = () => {
+    if (isRegistrationOpen) {
+      setIsRegistrationOpen(false);
+    }
+    setIsModalOpen(true);
+  };
 
   return (
     <div className="bg-white" style={{ fontFamily: "TitilliumWeb-Regular" }}>
-      <div style={{zIndex: "1000", position: "absolute"}}>
-        <SignInModal isOpen={isModalOpen} onClose={closeModal} />
-      </div>
-
+      <SignInModal isOpen={isModalOpen} onClose={closeModal} />
+      <RegistrationModal
+        isOpen={isRegistrationOpen}
+        onClose={() => setIsRegistrationOpen(false)}
+      />
       {/* Mobile menu */}
       <Transition show={open}>
         <Dialog className="relative z-40 lg:hidden" onClose={setOpen}>
@@ -319,7 +334,10 @@ export default function Example() {
                     >
                       SIGN IN
                     </button>
-                    <button class="ml-3 inline-block text-sm font-medium bg-custom-red text-white py-2 px-4 rounded">
+                    <button
+                      className="ml-3 inline-block text-sm font-medium bg-custom-red text-white py-2 px-4 rounded"
+                      onClick={openRegistrationModal}
+                    >
                       SUBSCRIBE
                     </button>
                   </div>
@@ -357,7 +375,7 @@ export default function Example() {
               {/* Flyout menus */}
               <PopoverGroup
                 className="hidden lg:ml-8 lg:block lg:self-stretch"
-                style={{ fontFamily: "TitilliumWeb-SemiBold" }}
+                style={{ fontFamily: "TitilliumWeb-SemiBold", zIndex: "20" }}
               >
                 <div className="flex h-full space-x-8">
                   {navigation.pages.map((page) => (
@@ -527,7 +545,10 @@ export default function Example() {
                       SIGN IN
                     </button>
 
-                    <button class="ml-3 inline-block text-sm font-medium bg-custom-red text-white py-2 px-4 rounded">
+                    <button
+                      className="ml-3 inline-block text-sm font-medium bg-custom-red text-white py-2 px-4 rounded"
+                      onClick={openRegistrationModal}
+                    >
                       SUBSCRIBE
                     </button>
                   </a>
