@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, axios, useEffect } from "react";
 import {
   Dialog,
   DialogPanel,
@@ -38,7 +38,7 @@ import alpine from "../assets/images/bolids/alpine.png";
 import team from "../assets/images/teams.png";
 import team2 from "../assets/images/teams2.jpg";
 import SignInModal from "./Modal";
-import RegistrationModal from "./RegistrationModal"
+import RegistrationModal from "./RegistrationModal";
 
 const navigation = {
   pages: [
@@ -146,6 +146,64 @@ export default function Example() {
 
   const closeModal = () => setIsModalOpen(false);
 
+  // Additional state and functions
+  const [toggle, setToggle] = useState(false);
+  const [modali, setModali] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const signedInUser = localStorage.getItem("user");
+    if (signedInUser) {
+      setUser(JSON.parse(signedInUser));
+    }
+  }, []);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const endpoint = isSignUp ? "Sign_up.php" : "signin.php";
+      const response = await axios.post(
+        `http://localhost/Backend/${endpoint}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Response:", response.data.user);
+
+      if (response.data.status === "success") {
+        if (!isSignUp) {
+          localStorage.setItem("users", JSON.stringify(response.data.user));
+          setUser(response.data.user);
+        }
+        setModali(false);
+      } else {
+        console.error(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const handleSignOut = () => {
+    localStorage.removeItem("users");
+    setUser(null);
+  };
+
   const openRegistrationModal = () => {
     if (isModalOpen) {
       closeModal();
@@ -158,6 +216,11 @@ export default function Example() {
       setIsRegistrationOpen(false);
     }
     setIsModalOpen(true);
+  };
+
+  
+  const handleToggle = () => {
+    setToggle(!toggle);
   };
 
   return (

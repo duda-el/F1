@@ -8,13 +8,14 @@ const SignInModal = ({ isOpen, onClose }) => {
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-60">
       <div className="bg-custom-black p-8 rounded-lg shadow-lg w-11/12 max-w-md mx-auto relative">
         <h2 className="text-2xl mb-6 text-red-600 font-bold">Sign In</h2>
-        <form>
+        <form method='post'>
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-300">Email</label>
             <input
               type="email"
               className="mt-2 block w-full border border-gray-600 rounded py-2 px-4 bg-gray-800 text-gray-300 focus:outline-none focus:border-red-600"
               required
+              name='email'
             />
           </div>
           <div className="mb-6">
@@ -23,6 +24,7 @@ const SignInModal = ({ isOpen, onClose }) => {
               type="password"
               className="mt-2 block w-full border border-gray-600 rounded py-2 px-4 bg-gray-800 text-gray-300 focus:outline-none focus:border-red-600"
               required
+              name='password'
             />
           </div>
           <button
