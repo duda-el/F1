@@ -171,7 +171,7 @@ export default function Example() {
   }, []);
 
   return (
-    <div className="bg-white" style={{ fontFamily: "TitilliumWeb-Regular" }}>
+    <div className="bg-white" style={{ fontFamily: "TitilliumWeb-Regular",}}>
       <SignInModal isOpen={isModalOpen} onClose={closeModal} />
       <RegistrationModal
         isOpen={isRegistrationOpen}
@@ -200,7 +200,7 @@ export default function Example() {
               leaveFrom="translate-x-0"
               leaveTo="-translate-x-full"
             >
-              <DialogPanel className="relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl">
+              <DialogPanel className="relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl" >
                 <div className="flex px-4 pb-2 pt-5">
                   <button
                     type="button"
@@ -358,7 +358,7 @@ export default function Example() {
         </Dialog>
       </Transition>
 
-      <header className="relative bg-white py-2 border-b-2 border-b-custom-red">
+      <header className="relative bg-white py-2 border-b-2 border-b-custom-red" style={{ zIndex: 23 }}>
         <nav
           aria-label="Top"
           className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"

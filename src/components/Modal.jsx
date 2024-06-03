@@ -64,7 +64,7 @@ const SignInModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-60">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-9999" style={{ zIndex: 21 }}>
       <div className="bg-custom-black p-8 rounded-lg shadow-lg w-11/12 max-w-md mx-auto relative">
         <h2 className="text-2xl mb-6 text-red-600 font-bold">Sign In</h2>
         <form onSubmit={handleSubmit}>
