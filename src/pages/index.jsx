@@ -18,10 +18,10 @@ export default function HomePage() {
           style={{ width: "100%", height: "auto" }}
         />
       </div>
-      <div style={{width: "100%", height: "auto", marginTop: "20px", display: "flex", flexDirection: "column", alignItems: "center", gap: "20px"}}>
-        <h2 style={{fontFamily: "formula1-bold", fontSize: "30px"}}>2024 F1® Schedule</h2>
+      {/* <div style={{width: "100%", height: "auto", marginTop: "20px", display: "flex", flexDirection: "column", alignItems: "center", gap: "20px"}}> */}
+        {/* <h2 style={{fontFamily: "formula1-bold", fontSize: "30px"}}>2024 F1® Schedule</h2> */}
         <F1Schedule />
-      </div>
+      {/* </div> */}
     </div>
   );
 }

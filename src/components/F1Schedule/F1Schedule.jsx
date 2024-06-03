@@ -344,6 +344,7 @@ const F1Schedule = () => {
 
   return (
     <div className="card-wrapper">
+      <h2 style={{fontFamily: "formula1-bold", fontSize: "30px", marginTop: "20px", color: "white"}}>2024 F1® Schedule</h2>
       <div className="horizontalSlider">
         {data.map((item, index) => (
           <div className="card2" key={index}>
