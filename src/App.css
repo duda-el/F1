@@ -25,3 +25,17 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'formula1';
+  src: url('../public/font/Formula1-Regular.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'formula1-bold';
+  src: url('../public/font/Formula1-Bold.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+

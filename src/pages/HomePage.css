@@ -1,0 +1,29 @@
+.banner {
+  position: relative;
+  width: 100%;
+}
+
+.mainText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  text-align: center;
+  color: white;
+  font-family: "formula1-bold";
+  font-size: 50px; /* Default font size */
+}
+
+
+@media (max-width: 1080px) {
+    .mainText {
+      font-size: 34px; /* Adjust font size for smaller screens */
+    }
+  }
+
+@media (max-width: 768px) {
+  .mainText {
+    font-size: 20px; /* Adjust font size for smaller screens */
+  }
+}
