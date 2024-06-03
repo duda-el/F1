@@ -7,7 +7,7 @@
 }
 
 .f1-tire {
-  width: 200px;
+  width: 180px;
   height: auto;
   animation: spin 1s linear infinite;
 }
