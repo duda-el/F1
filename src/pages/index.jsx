@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../components/Header";
 import Leclerc from "../assets/images/leclerc2.jpg";
 import "./HomePage.css"
-import F1ScheduleCard from "../components/F1ScheduleCard"
+import F1Schedule from "../components/F1Schedule/F1Schedule"
 
 export default function HomePage() {
   return (
@@ -16,7 +16,7 @@ export default function HomePage() {
           style={{ width: "100%", height: "auto" }}
         />
       </div>
-      <F1ScheduleCard/>
+      <F1Schedule/>
     </div>
   );
 }

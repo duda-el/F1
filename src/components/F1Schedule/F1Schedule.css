@@ -1,0 +1,32 @@
+.card-wrapper {
+  width: 100%;
+  height: auto;
+  background-color: #15151e;
+  padding-bottom: 20px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.horizontalSlider {
+  width: 90%;
+  height: auto;
+  padding: 25px;
+  display: flex;
+  gap: 40px;
+  overflow-x: auto;
+}
+.horizontalSlider::-webkit-scrollbar {
+  width: 6px;
+  height: 8px;
+}
+
+.horizontalSlider::-webkit-scrollbar-track {
+  background-color: #ccc;
+  border-radius: 5px;
+}
+
+.horizontalSlider::-webkit-scrollbar-thumb {
+  background-color: red;
+  border-radius: 8px;
+}

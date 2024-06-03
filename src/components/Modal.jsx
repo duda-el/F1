@@ -55,10 +55,7 @@ const SignInModal = ({ isOpen, onClose }) => {
     }
   };
 
-  const handleSignOut = () => {
-    localStorage.removeItem("user");
-    setUser(null);
-  };
+
 
   if (!isOpen) return null;
 

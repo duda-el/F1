@@ -1,7 +1,7 @@
 // App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/index';
 import F1TireLoader from './components/Loader'; // Import the loader component
 
 function App() {
