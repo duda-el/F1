@@ -146,64 +146,6 @@ export default function Example() {
 
   const closeModal = () => setIsModalOpen(false);
 
-  // Additional state and functions
-  const [toggle, setToggle] = useState(false);
-  const [modali, setModali] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const signedInUser = localStorage.getItem("user");
-    if (signedInUser) {
-      setUser(JSON.parse(signedInUser));
-    }
-  }, []);
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const endpoint = isSignUp ? "Sign_up.php" : "signin.php";
-      const response = await axios.post(
-        `http://localhost/Backend/${endpoint}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      console.log("Response:", response.data.user);
-
-      if (response.data.status === "success") {
-        if (!isSignUp) {
-          localStorage.setItem("users", JSON.stringify(response.data.user));
-          setUser(response.data.user);
-        }
-        setModali(false);
-      } else {
-        console.error(response.data.message);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  const handleSignOut = () => {
-    localStorage.removeItem("users");
-    setUser(null);
-  };
-
   const openRegistrationModal = () => {
     if (isModalOpen) {
       closeModal();
@@ -218,10 +160,14 @@ export default function Example() {
     setIsModalOpen(true);
   };
 
-  
-  const handleToggle = () => {
-    setToggle(!toggle);
-  };
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const signedInUser = localStorage.getItem("user");
+    if (signedInUser) {
+      setUser(JSON.parse(signedInUser));
+    }
+  }, []);
 
   return (
     <div className="bg-white" style={{ fontFamily: "TitilliumWeb-Regular" }}>
@@ -601,19 +547,39 @@ export default function Example() {
                       alt=""
                       className="block h-auto w-5 flex-shrink-0"
                     />
-                    <button
-                      className="ml-3 inline-block text-sm font-medium bg-custom-black text-white py-2 px-4 rounded"
-                      onClick={openModal}
-                    >
-                      SIGN IN
-                    </button>
+                    {user ? (
+                      <>
+                        <span className="ml-3 inline-block text-md font-medium text-black py-2 px-4">
+                          {user.name}
+                        </span>
+                        <button
+                          className="ml-3 inline-block text-sm font-medium bg-custom-red text-white py-2 px-4 rounded"
+                          onClick={() => {
+                            // Clear user data from localStorage and set user state to null
+                            localStorage.removeItem("user");
+                            setUser(null);
+                          }}
+                        >
+                          SIGN OUT
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button
+                          className="ml-3 inline-block text-sm font-medium bg-custom-black text-white py-2 px-4 rounded"
+                          onClick={openModal}
+                        >
+                          SIGN IN
+                        </button>
 
-                    <button
-                      className="ml-3 inline-block text-sm font-medium bg-custom-red text-white py-2 px-4 rounded"
-                      onClick={openRegistrationModal}
-                    >
-                      SUBSCRIBE
-                    </button>
+                        <button
+                          className="ml-3 inline-block text-sm font-medium bg-custom-red text-white py-2 px-4 rounded"
+                          onClick={openRegistrationModal}
+                        >
+                          SUBSCRIBE
+                        </button>
+                      </>
+                    )}
                   </a>
                 </div>
               </div>

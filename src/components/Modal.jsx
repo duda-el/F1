@@ -1,21 +1,84 @@
-import React from 'react';
-import { XMarkIcon } from '@heroicons/react/24/outline'; 
+import React, { useState, useEffect } from 'react';
+import { XMarkIcon } from '@heroicons/react/24/outline';
+import axios from 'axios'; // Ensure axios is imported
 
 const SignInModal = ({ isOpen, onClose }) => {
+  // Move hooks outside of conditional return
+  const [toggle, setToggle] = useState(false);
+  const [modali, setModali] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const signedInUser = localStorage.getItem("user");
+    if (signedInUser) {
+      setUser(JSON.parse(signedInUser));
+    }
+  }, []);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const endpoint = isSignUp ? "Sign_up.php" : "signin.php";
+      const response = await axios.post(
+        `http://localhost/Backend/${endpoint}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Response:", response.data.user);
+
+      if (response.data.status === "success") {
+        if (!isSignUp) {
+          localStorage.setItem("user", JSON.stringify(response.data.user)); // Fix key to "user"
+          setUser(response.data.user);
+          console.log(user)
+        }
+        setModali(false);
+        onClose(); // Close modal on successful sign-in
+      } else {
+        console.error(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const handleSignOut = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+  };
+
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-60">
       <div className="bg-custom-black p-8 rounded-lg shadow-lg w-11/12 max-w-md mx-auto relative">
         <h2 className="text-2xl mb-6 text-red-600 font-bold">Sign In</h2>
-        <form method='post'>
+        <form onSubmit={handleSubmit}> {/* Add onSubmit */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-gray-300">Email</label>
             <input
               type="email"
               className="mt-2 block w-full border border-gray-600 rounded py-2 px-4 bg-gray-800 text-gray-300 focus:outline-none focus:border-red-600"
               required
-              name='email'
+              name="email"
+              value={formData.email}
+              onChange={handleChange} // Add onChange
             />
           </div>
           <div className="mb-6">
@@ -24,7 +87,9 @@ const SignInModal = ({ isOpen, onClose }) => {
               type="password"
               className="mt-2 block w-full border border-gray-600 rounded py-2 px-4 bg-gray-800 text-gray-300 focus:outline-none focus:border-red-600"
               required
-              name='password'
+              name="password"
+              value={formData.password}
+              onChange={handleChange} // Add onChange
             />
           </div>
           <button
@@ -38,7 +103,7 @@ const SignInModal = ({ isOpen, onClose }) => {
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-300 transition duration-200"
           onClick={onClose}
         >
-          <XMarkIcon className="h-6 w-6" /> {/* Adding the X icon */}
+          <XMarkIcon className="h-6 w-6" />
         </button>
       </div>
     </div>
