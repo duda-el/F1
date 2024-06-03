@@ -39,6 +39,7 @@ import team from "../assets/images/teams.png";
 import team2 from "../assets/images/teams2.jpg";
 import SignInModal from "./Modal";
 import RegistrationModal from "./RegistrationModal";
+import racerIcon from "../assets/images/racerIcon.jpeg";
 
 const navigation = {
   pages: [
@@ -549,8 +550,23 @@ export default function Example() {
                     />
                     {user ? (
                       <>
-                        <span className="ml-3 inline-block text-md font-medium text-black py-2 px-4">
-                          {user.name}
+                        <span
+                          className="ml-3 inline-block text-md font-medium text-black py-2 px-4"
+                          style={{ fontFamily: "TitilliumWeb-SemiBold" }}
+                        >
+                          <div className="flex items-center gap-2">
+                            <img
+                              src={racerIcon}
+                              alt="profileIcon"
+                              style={{
+                                width: "30px",
+                                height: "30px",
+                                borderRadius: "50%",
+                                border: "2px solid #E10600",
+                              }}
+                            />
+                            {user.name}
+                          </div>
                         </span>
                         <button
                           className="ml-3 inline-block text-sm font-medium bg-custom-red text-white py-2 px-4 rounded"
