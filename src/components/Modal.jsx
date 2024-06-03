@@ -4,9 +4,8 @@ import axios from "axios"; // Ensure axios is imported
 
 const SignInModal = ({ isOpen, onClose }) => {
   // Move hooks outside of conditional return
-  const [toggle, setToggle] = useState(false);
-  const [modali, setModali] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [setModali] = useState(false);
+  const [isSignUp] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
