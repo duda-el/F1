@@ -40,11 +40,14 @@ import team2 from "../assets/images/teams2.jpg";
 import SignInModal from "./Modal";
 import RegistrationModal from "./RegistrationModal";
 import racerIcon from "../assets/images/racerIcon.jpeg";
+// import Results from "../pages/Results";
+import { Link } from "react-router-dom";
+// import { Navigate, Route, Routes } from "react-router-dom";
 
 const navigation = {
   pages: [
-    { name: "Home", href: "#" },
-    { name: "Results", href: "#" },
+    { name: "Home", href: "/" },
+    { name: "Results", href: "/result" },
   ],
   categories: [
     {
@@ -141,6 +144,7 @@ function classNames(...classes) {
 }
 
 export default function Example() {
+  
   const [open, setOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false); // State for the registration modal
@@ -388,20 +392,23 @@ export default function Example() {
                 style={{ fontFamily: "TitilliumWeb-SemiBold", zIndex: "20" }}
               >
                 <div className="flex h-full space-x-8">
+      
                   {navigation.pages.map((page) => (
-                    <a
-                      key={page.name}
-                      href={page.href}
-                      className="flex items-center text-md font-medium text-black hover:text-custom-red"
-                    >
-                      {page.name}{" "}
-                      <img
-                        src={arrow}
-                        alt="dropdown"
-                        className="ml-1 w-6 h-auto opacity-0"
-                      />
-                    </a>
+                    // <a
+                    //   key={page.name}
+                    //   href={page.href}
+                    //   className="flex items-center text-md font-medium text-black hover:text-custom-red"
+                    // >
+                    //   {page.name}{" "}
+                      
+                    // </a>
+                    <Link to={page.href} className="flex items-center text-md font-medium text-black hover:text-custom-red">{page.name}<img
+                    src={arrow}
+                    alt="dropdown"
+                    className="ml-1 w-6 h-auto opacity-0"
+                  /></Link>
                   ))}
+           
                   {navigation.categories.map((category) => (
                     <Popover key={category.name} className="flex">
                       {({ open }) => (
