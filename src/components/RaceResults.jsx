@@ -62,7 +62,7 @@ const Results = () => {
             value={formData.grand_prix}
             onChange={handleChange}
             placeholder="Grand Prix"
-            className="border p-2 rounded-md focus:ring-2 focus:ring-red-500"
+            className="border-2 p-2 rounded-md  focus:outline-none focus:border-custom-red"
             required
           />
           <input
@@ -70,7 +70,7 @@ const Results = () => {
             name="race_date"
             value={formData.race_date}
             onChange={handleChange}
-            className="border p-2 rounded-md focus:ring-2 focus:ring-red-500"
+            className="border-2 p-2 rounded-md  focus:outline-none focus:border-custom-red"
             required
           />
           <input
@@ -79,7 +79,7 @@ const Results = () => {
             value={formData.winner}
             onChange={handleChange}
             placeholder="Winner"
-            className="border p-2 rounded-md focus:ring-2 focus:ring-red-500"
+            className="border-2 p-2 rounded-md  focus:outline-none focus:border-custom-red"
             required
           />
           <input
@@ -88,7 +88,7 @@ const Results = () => {
             value={formData.car}
             onChange={handleChange}
             placeholder="Car"
-            className="border p-2 rounded-md focus:ring-2 focus:ring-red-500"
+            className="border-2 p-2 rounded-md  focus:outline-none focus:border-custom-red"
             required
           />
           <input
@@ -97,7 +97,7 @@ const Results = () => {
             value={formData.laps}
             onChange={handleChange}
             placeholder="Laps"
-            className="border p-2 rounded-md focus:ring-2 focus:ring-red-500"
+            className="border-2 p-2 rounded-md focus:outline-none focus:border-custom-red"
             required
           />
           <input
@@ -106,7 +106,7 @@ const Results = () => {
             value={formData.race_time}
             onChange={handleChange}
             placeholder="Race Time"
-            className="border p-2 rounded-md focus:ring-2 focus:ring-red-500"
+            className="border-2 p-2 rounded-md focus:outline-none focus:border-custom-red"
             required
           />
           <button type="submit" className="bg-custom-red text-white p-2 rounded-md duration-300 col-span-full">Add Result</button>
