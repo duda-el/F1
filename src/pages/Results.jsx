@@ -12,9 +12,9 @@ const Results = () => {
   }, []);
 
   return (
-    <div style={{ width: '100%', height: '90vh', background: '#ffff' }}>
+    <div style={{ width: '100%', height: '90Zvh', background: '#ffff' }}>
       <Header />
-      <div className="bg-white p-10">
+      <div className="bg-white p-4">
         <h1 className="text-4xl bg-custom-red p-6 font-bold text-center text-white mb-10" style={{ fontFamily: "formula1-bold",}}>2024 Race Results</h1>
         <div className="overflow-x-auto shadow-md rounded-lg mt-10">
           <table className="min-w-full text-sm text-left">
