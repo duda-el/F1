@@ -112,7 +112,7 @@ const Results = () => {
           <button type="submit" className="bg-custom-red text-white p-2 rounded-md duration-300 col-span-full">Add Result</button>
         </form>
 
-        <div className="overflow-x-auto shadow-md rounded-lg mt-10 horizontalSlider" style={{ maxHeight: '500px', overflowY: 'auto' }}>
+        <div className="overflow-x-auto shadow-md rounded-lg mt-10 horizontalSlider2" style={{ maxHeight: '500px', overflowY: 'auto' }}>
           <table className="min-w-full text-sm text-left">
             <thead className="bg-gray-100 text-custom-red text-sm uppercase" style={{ fontFamily: "formula1",}}>
               <tr>

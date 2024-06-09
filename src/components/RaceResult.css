@@ -1,18 +1,18 @@
-.horizontalSlider {
+.horizontalSlider2 {
   width: 100%;
   height: auto;
 }
 
-.horizontalSlider::-webkit-scrollbar {
+.horizontalSlider2::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
-.horizontalSlider::-webkit-scrollbar-track {
+.horizontalSlider2::-webkit-scrollbar-track {
   background-color: #ccc;
 }
 
-.horizontalSlider::-webkit-scrollbar-thumb {
+.horizontalSlider2::-webkit-scrollbar-thumb {
   background-color: red;
 }
 
