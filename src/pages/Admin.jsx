@@ -1,7 +1,7 @@
 // Admin.jsx
 
 import React, { useState, useEffect } from 'react';
-import { FaTachometerAlt, FaUsers, FaUser, FaCalendarAlt, FaList } from 'react-icons/fa';
+import { FaTachometerAlt, FaUsers, FaUser, FaCalendarAlt, FaList, FaDoorOpen } from 'react-icons/fa';
 
 const Admin = () => {
   const [selectedNavItem, setSelectedNavItem] = useState('Dashboard');
@@ -29,10 +29,15 @@ const Admin = () => {
     };
   }, []);
 
+  const handleSignOut = () => {
+    // Implement sign out logic here
+    console.log('Signing out...');
+  };
+
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
-      <div className="bg-custom-black text-white w-64">
+      <div className="bg-custom-black text-white w-64 flex flex-col">
         <div className="py-6 px-6">
           <h1 className="text-3xl font-bold" style={{ fontFamily: "formula1-bold" }}>User</h1>
         </div>
@@ -50,6 +55,12 @@ const Admin = () => {
             </div>
           ))}
         </nav>
+        {/* Sign Out Button */}
+        <div className="mt-auto py-4 px-6 cursor-pointer" onClick={handleSignOut} style={{ fontFamily: "formula1" }}>
+          <button className="text-md font-bold focus:outline-none flex items-center bg-custom-red text-white py-2 px-4 rounded">
+            Sign Out
+          </button>
+        </div>
       </div>
 
       {/* Main Content Area */}
