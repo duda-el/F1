@@ -144,7 +144,6 @@ function classNames(...classes) {
 }
 
 export default function Example() {
-  
   const [open, setOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false); // State for the registration modal
@@ -171,11 +170,12 @@ export default function Example() {
     const signedInUser = localStorage.getItem("user");
     if (signedInUser) {
       setUser(JSON.parse(signedInUser));
+      console.log(JSON.parse(signedInUser).role);
     }
   }, []);
 
   return (
-    <div className="bg-white" style={{ fontFamily: "TitilliumWeb-Regular",}}>
+    <div className="bg-white" style={{ fontFamily: "TitilliumWeb-Regular" }}>
       <SignInModal isOpen={isModalOpen} onClose={closeModal} />
       <RegistrationModal
         isOpen={isRegistrationOpen}
@@ -204,7 +204,7 @@ export default function Example() {
               leaveFrom="translate-x-0"
               leaveTo="-translate-x-full"
             >
-              <DialogPanel className="relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl" >
+              <DialogPanel className="relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl">
                 <div className="flex px-4 pb-2 pt-5">
                   <button
                     type="button"
@@ -362,7 +362,10 @@ export default function Example() {
         </Dialog>
       </Transition>
 
-      <header className="relative bg-white py-2 border-b-2 border-b-custom-red" style={{ zIndex: 23 }}>
+      <header
+        className="relative bg-white py-2 border-b-2 border-b-custom-red"
+        style={{ zIndex: 23 }}
+      >
         <nav
           aria-label="Top"
           className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
@@ -392,7 +395,6 @@ export default function Example() {
                 style={{ fontFamily: "TitilliumWeb-SemiBold", zIndex: "20" }}
               >
                 <div className="flex h-full space-x-8">
-      
                   {navigation.pages.map((page) => (
                     // <a
                     //   key={page.name}
@@ -400,15 +402,21 @@ export default function Example() {
                     //   className="flex items-center text-md font-medium text-black hover:text-custom-red"
                     // >
                     //   {page.name}{" "}
-                      
+
                     // </a>
-                    <Link to={page.href} className="flex items-center text-md font-medium text-black hover:text-custom-red">{page.name}<img
-                    src={arrow}
-                    alt="dropdown"
-                    className="ml-1 w-6 h-auto opacity-0"
-                  /></Link>
+                    <Link
+                      to={page.href}
+                      className="flex items-center text-md font-medium text-black hover:text-custom-red"
+                    >
+                      {page.name}
+                      <img
+                        src={arrow}
+                        alt="dropdown"
+                        className="ml-1 w-6 h-auto opacity-0"
+                      />
+                    </Link>
                   ))}
-           
+
                   {navigation.categories.map((category) => (
                     <Popover key={category.name} className="flex">
                       {({ open }) => (
@@ -572,13 +580,20 @@ export default function Example() {
                                 border: "2px solid #E10600",
                               }}
                             />
-                            {user.name}
+                            {/* {user.role === 1 ? (
+                              <Link to="/Admin"
+                               className="cursor-pointer">
+                                <span>{user.name}</span>
+                              </Link>
+                            ) : (
+                              <span>{user.name}</span>
+                            )} */}
+                            <Link to={user.role == 1 ?  '/admin' : ''}><span>{user.name}</span></Link>
                           </div>
                         </span>
                         <button
                           className="ml-3 inline-block text-sm font-medium bg-custom-red text-white py-2 px-4 rounded"
                           onClick={() => {
-                            // Clear user data from localStorage and set user state to null
                             localStorage.removeItem("user");
                             setUser(null);
                           }}
