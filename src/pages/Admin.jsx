@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaTachometerAlt, FaUsers, FaUser, FaCalendarAlt, FaList } from 'react-icons/fa';
+import { FaTachometerAlt, FaUsers, FaUser, FaCalendarAlt, FaList, FaSignOutAlt } from 'react-icons/fa';
 import RaceResults from '../components/RaceResults';
 
 const Admin = () => {
@@ -63,7 +63,7 @@ const Admin = () => {
         {/* Sign Out Button */}
         <div className="mt-auto py-4 px-6 cursor-pointer" onClick={handleSignOut} style={{ fontFamily: 'formula1' }}>
           <Link to="/" className="uppercase text-md font-bold focus:outline-none flex items-center bg-custom-red text-white py-2 px-4 rounded">
-            Sign Out
+            <FaSignOutAlt className="mr-2" /> Home
           </Link>
         </div>
       </div>
