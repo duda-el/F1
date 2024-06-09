@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../components/Header';
+import "./RaceResult.css"
 
 const Results = () => {
   const [results, setResults] = useState([]);
@@ -109,10 +109,10 @@ const Results = () => {
             className="border p-2 rounded-md focus:ring-2 focus:ring-red-500"
             required
           />
-          <button type="submit" className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 transition duration-300 col-span-full">Add Result</button>
+          <button type="submit" className="bg-custom-red text-white p-2 rounded-md duration-300 col-span-full">Add Result</button>
         </form>
 
-        <div className="overflow-x-auto shadow-md rounded-lg mt-10" style={{ maxHeight: '500px', overflowY: 'auto' }}>
+        <div className="overflow-x-auto shadow-md rounded-lg mt-10 horizontalSlider" style={{ maxHeight: '500px', overflowY: 'auto' }}>
           <table className="min-w-full text-sm text-left">
             <thead className="bg-gray-100 text-custom-red text-sm uppercase" style={{ fontFamily: "formula1",}}>
               <tr>
