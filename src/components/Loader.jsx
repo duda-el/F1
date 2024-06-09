@@ -1,7 +1,7 @@
 // F1TireLoader.js
-import React from 'react';
-import f1TireImg from '../assets/images/F1_Tire.png'; // Import your F1 tire image
-import "./Loader.css"
+import React from "react";
+import f1TireImg from "../assets/images/F1_Tire.png"; // Import your F1 tire image
+import "./Loader.css";
 
 const F1TireLoader = () => {
   return (

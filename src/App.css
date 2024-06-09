@@ -1,41 +1,44 @@
-*{
+* {
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
 }
+/* 
+body {
+  height: 100vh !important;
+} */
 
 @font-face {
-  font-family: 'TitilliumWeb-Regular';
-  src: url('../public/font/TitilliumWeb-Regular.ttf') format('truetype');
+  font-family: "TitilliumWeb-Regular";
+  src: url("../public/font/TitilliumWeb-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'TitilliumWeb-SemiBold';
-  src: url('../public/font/TitilliumWeb-SemiBold.ttf') format('truetype');
+  font-family: "TitilliumWeb-SemiBold";
+  src: url("../public/font/TitilliumWeb-SemiBold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'TitilliumWeb-Bold';
-  src: url('../public/font/TitilliumWeb-Bold.ttf') format('truetype');
+  font-family: "TitilliumWeb-Bold";
+  src: url("../public/font/TitilliumWeb-Bold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'formula1';
-  src: url('../public/font/Formula1-Regular.otf') format('truetype');
+  font-family: "formula1";
+  src: url("../public/font/Formula1-Regular.otf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'formula1-bold';
-  src: url('../public/font/Formula1-Bold.otf') format('truetype');
+  font-family: "formula1-bold";
+  src: url("../public/font/Formula1-Bold.otf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
-
