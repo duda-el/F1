@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import axios from "axios"; // Ensure axios is imported
+import { useNavigate } from "react-router-dom";
 
 const SignInModal = ({ isOpen, onClose }) => {
   // Move hooks outside of conditional return
@@ -24,6 +25,8 @@ const SignInModal = ({ isOpen, onClose }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -40,13 +43,16 @@ const SignInModal = ({ isOpen, onClose }) => {
       );
 
       if (response.data.status === "success") {
-        if (!isSignUp) {
-          localStorage.setItem("user", JSON.stringify(response.data.user));
-          setUser(response.data.user);
-          onClose();
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        setUser(response.data.user);
+        onClose();
+        if (response.data.user.role === 1) {
+          // If the user is an admin, navigate to the admin page
+          navigate("/admin"); // Change this to the appropriate admin route
+        } else {
+          // If the user is not an admin, reload the current page
           window.location.reload();
         }
-        setModali(false);
       } else {
         console.error(response.data.message);
       }
@@ -55,12 +61,13 @@ const SignInModal = ({ isOpen, onClose }) => {
     }
   };
 
-
-
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-9999" style={{ zIndex: 21 }}>
+    <div
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-9999"
+      style={{ zIndex: 21 }}
+    >
       <div className="bg-custom-black p-8 rounded-lg shadow-lg w-11/12 max-w-md mx-auto relative">
         <h2 className="text-2xl mb-6 text-red-600 font-bold">Sign In</h2>
         <form onSubmit={handleSubmit}>

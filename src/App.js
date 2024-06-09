@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/index';
 import Results from './pages/Results';
+import Admin from './pages/Admin'
 import F1TireLoader from './components/Loader'; // Import the loader component
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Routes>
           <Route path='/' element={<HomePage/>}/>
           <Route path='/result' element={<Results/>}/>
+          <Route path='/admin' element={<Admin/>}/>
         </Routes>
       )}
     </div>

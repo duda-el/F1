@@ -12,10 +12,10 @@ const Results = () => {
   }, []);
 
   return (
-    <div style={{ width: '100%', height: '100vh', background: '#ffff' }}>
+    <div style={{ width: '100%', height: '90vh', background: '#ffff' }}>
       <Header />
-      <div className="bg-white p-8">
-        <h1 className="text-4xl font-bold text-center text-gray-900 mb-10" style={{ fontFamily: "formula1-bold",}}>2024 Race Results</h1>
+      <div className="bg-white p-10">
+        <h1 className="text-4xl bg-custom-red p-6 font-bold text-center text-white mb-10" style={{ fontFamily: "formula1-bold",}}>2024 Race Results</h1>
         <div className="overflow-x-auto shadow-md rounded-lg mt-10">
           <table className="min-w-full text-sm text-left">
             <thead className="bg-gray-100 text-custom-red text-sm uppercase" style={{ fontFamily: "formula1",}}>
