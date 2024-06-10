@@ -1,10 +1,9 @@
-// src/pages/Admin.js
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaTachometerAlt, FaUsers, FaUser, FaCalendarAlt, FaList, FaSignOutAlt } from 'react-icons/fa';
 import RaceResults from '../components/RaceResults';
 import Dashboard from '../components/Dashboard';
+import UserManagement from '../components/UserManagement '; // Import the UserManagement component
 
 const Admin = () => {
   const [selectedNavItem, setSelectedNavItem] = useState('Dashboard');
@@ -12,7 +11,7 @@ const Admin = () => {
   const navItems = [
     { name: 'Dashboard', icon: <FaTachometerAlt /> },
     { name: 'Results', icon: <FaUsers /> },
-    { name: 'Drivers', icon: <FaUser /> },
+    { name: 'Users', icon: <FaUser /> },
     { name: 'Schedule', icon: <FaCalendarAlt /> },
     { name: 'Standings', icon: <FaList /> },
   ];
@@ -61,6 +60,7 @@ const Admin = () => {
         <div className="p-6">
           {selectedNavItem === 'Dashboard' && <Dashboard />}
           {selectedNavItem === 'Results' && <RaceResults />}
+          {selectedNavItem === 'Users' && <UserManagement />} {/* Render UserManagement when 'Users' is selected */}
           {/* Include other tabs as needed */}
         </div>
       </div>
