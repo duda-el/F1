@@ -1,4 +1,5 @@
-import { Fragment, useState, axios, useEffect } from "react";
+import { Fragment, useState, useEffect } from "react";
+import axios from "axios";
 import {
   Dialog,
   DialogPanel,
@@ -40,104 +41,7 @@ import team2 from "../assets/images/teams2.jpg";
 import SignInModal from "./Modal";
 import RegistrationModal from "./RegistrationModal";
 import racerIcon from "../assets/images/racerIcon.jpeg";
-// import Results from "../pages/Results";
 import { Link } from "react-router-dom";
-// import { Navigate, Route, Routes } from "react-router-dom";
-
-const navigation = {
-  pages: [
-    { name: "Home", href: "/" },
-    { name: "Results", href: "/result" },
-  ],
-  categories: [
-    {
-      id: "drivers",
-      name: "Drivers",
-      featured: [
-        {
-          imageSrc: cars,
-          imageAlt: "f1 drivers",
-        },
-        {
-          imageSrc: f1drivers,
-          imageAlt: "f1 drivers",
-        },
-      ],
-      sections: [
-        {
-          items: [
-            { name: "Alexander Albon", href: "#", color: "#64C4FF" },
-            { name: "Fernando Alonso", href: "#", color: "#229971" },
-            { name: "Valtteri Bottas", href: "#", color: "#52E252" },
-            { name: "Pierre Gasly", href: "#", color: "#0093CC" },
-            { name: "Lewis Hamilton", href: "#", color: "#27F4D2" },
-            { name: "Nico Hulkenberg", href: "#", color: "#B6BABD" },
-            { name: "Charles Leclerc", href: "#", color: "#E80020" },
-          ],
-        },
-        {
-          items: [
-            { name: "Kevin Magnussen", href: "#", color: "#B6BABD" },
-            { name: "Lando Norris", href: "#", color: "#FF8000" },
-            { name: "Esteban Ocon", href: "#", color: "#0093CC" },
-            { name: "Sergio Perez", href: "#", color: "#3671C6" },
-            { name: "Oscar Piastri", href: "#", color: "#FF8000" },
-            { name: "Daniel Ricciardo", href: "#", color: "#6692FF" },
-            { name: "George Russell", href: "#", color: "#27F4D2" },
-          ],
-        },
-        {
-          items: [
-            { name: "Carlos Sainz", href: "#", color: "#E80020" },
-            { name: "Logan Sargeant", href: "#", color: "#64C4FF" },
-            { name: "Lance Stroll", href: "#", color: "#229971" },
-            { name: "Yuki Tsunoda", href: "#", color: "#6692FF" },
-            { name: "Max Verstappen", href: "#", color: "#3671C6" },
-            { name: "Zhou Guanyu", href: "#", color: "#52E252" },
-          ],
-        },
-      ],
-    },
-    {
-      id: "teams",
-      name: "Teams",
-      featured: [
-        {
-          imageSrc: team,
-          imageAlt: "f1 teams",
-        },
-        {
-          imageSrc: team2,
-          imageAlt: "f1 teams",
-        },
-      ],
-      sections: [
-        {
-          items: [
-            { name: "Alpine", href: "#", imageSrc: alpine },
-            { name: "Aston Martin", href: "#", imageSrc: astonmartin },
-            { name: "Ferrari", href: "#", imageSrc: ferrari },
-            { name: "Haas", href: "#", imageSrc: haas },
-          ],
-        },
-        {
-          items: [
-            { name: "Kick Sauber", href: "#", imageSrc: kickSauber },
-            { name: "McLaren", href: "#", imageSrc: mclaren },
-            { name: "Mercedes", href: "#", imageSrc: mercedes },
-          ],
-        },
-        {
-          items: [
-            { name: "RB", href: "#", imageSrc: rb },
-            { name: "Red Bull Racing", href: "#", imageSrc: redbull },
-            { name: "Williams", href: "#", imageSrc: williams },
-          ],
-        },
-      ],
-    },
-  ],
-};
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -146,25 +50,32 @@ function classNames(...classes) {
 export default function Example() {
   const [open, setOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isRegistrationOpen, setIsRegistrationOpen] = useState(false); // State for the registration modal
-
-  const closeModal = () => setIsModalOpen(false);
-
-  const openRegistrationModal = () => {
-    if (isModalOpen) {
-      closeModal();
-    }
-    setIsRegistrationOpen(true);
-  };
-
-  const openModal = () => {
-    if (isRegistrationOpen) {
-      setIsRegistrationOpen(false);
-    }
-    setIsModalOpen(true);
-  };
-
+  const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [drivers, setDrivers] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const driverIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+
+  useEffect(() => {
+    const fetchDrivers = async () => {
+      try {
+        const fetchedDrivers = {};
+        for (const id of driverIds) {
+          const response = await axios.get(`http://localhost/Backend/get_drivers.php?id=${id}`);
+          fetchedDrivers[id] = response.data;
+        }
+        setDrivers(fetchedDrivers);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDrivers();
+  }, []);
 
   useEffect(() => {
     const signedInUser = localStorage.getItem("user");
@@ -174,14 +85,111 @@ export default function Example() {
     }
   }, []);
 
+  const closeModal = () => setIsModalOpen(false);
+  const openRegistrationModal = () => {
+    if (isModalOpen) {
+      closeModal();
+    }
+    setIsRegistrationOpen(true);
+  };
+  const openModal = () => {
+    if (isRegistrationOpen) {
+      setIsRegistrationOpen(false);
+    }
+    setIsModalOpen(true);
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  const navigation = {
+    pages: [
+      { name: "Home", href: "/" },
+      { name: "Results", href: "/result" },
+    ],
+    categories: [
+      {
+        id: "drivers",
+        name: "Drivers",
+        featured: [
+          {
+            imageSrc: cars,
+            imageAlt: "f1 drivers",
+          },
+          {
+            imageSrc: f1drivers,
+            imageAlt: "f1 drivers",
+          },
+        ],
+        sections: [
+          {
+            items: driverIds.slice(0, 7).map(id => ({
+              name: drivers[id]?.name || "Loading...",
+              href: "#",
+              color: drivers[id]?.color || "#000000", // Default to black if color not found
+            })),
+          },
+          {
+            items: driverIds.slice(7, 14).map(id => ({
+              name: drivers[id]?.name || "Loading...",
+              href: "#",
+              color: drivers[id]?.color || "#000000",
+            })),
+          },
+          {
+            items: driverIds.slice(14, 20).map(id => ({
+              name: drivers[id]?.name || "Loading...",
+              href: "#",
+              color: drivers[id]?.color || "#000000",
+            })),
+          },
+        ],
+      },
+      {
+        id: "teams",
+        name: "Teams",
+        featured: [
+          {
+            imageSrc: team,
+            imageAlt: "f1 teams",
+          },
+          {
+            imageSrc: team2,
+            imageAlt: "f1 teams",
+          },
+        ],
+        sections: [
+          {
+            items: [
+              { name: "Alpine", href: "#", imageSrc: alpine },
+              { name: "Aston Martin", href: "#", imageSrc: astonmartin },
+              { name: "Ferrari", href: "#", imageSrc: ferrari },
+              { name: "Haas", href: "#", imageSrc: haas },
+            ],
+          },
+          {
+            items: [
+              { name: "Kick Sauber", href: "#", imageSrc: kickSauber },
+              { name: "McLaren", href: "#", imageSrc: mclaren },
+              { name: "Mercedes", href: "#", imageSrc: mercedes },
+            ],
+          },
+          {
+            items: [
+              { name: "RB", href: "#", imageSrc: rb },
+              { name: "Red Bull Racing", href: "#", imageSrc: redbull },
+              { name: "Williams", href: "#", imageSrc: williams },
+            ],
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="bg-white" style={{ fontFamily: "TitilliumWeb-Regular" }}>
       <SignInModal isOpen={isModalOpen} onClose={closeModal} />
-      <RegistrationModal
-        isOpen={isRegistrationOpen}
-        onClose={() => setIsRegistrationOpen(false)}
-      />
-      {/* Mobile menu */}
+      <RegistrationModal isOpen={isRegistrationOpen} onClose={() => setIsRegistrationOpen(false)} />
       <Transition show={open}>
         <Dialog className="relative z-40 lg:hidden" onClose={setOpen}>
           <TransitionChild
@@ -201,7 +209,7 @@ export default function Example() {
               enterFrom="-translate-x-full"
               enterTo="translate-x-0"
               leave="transition ease-in-out duration-300 transform"
-              leaveFrom="translate-x-0"
+              leaveFrom="-translate-x-0"
               leaveTo="-translate-x-full"
             >
               <DialogPanel className="relative flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl">
@@ -219,17 +227,13 @@ export default function Example() {
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   {navigation.pages.map((page) => (
                     <div key={page.name} className="flow-root">
-                      <a
-                        href={page.href}
-                        className="-m-2 block p-2 font-medium text-gray-900"
-                      >
+                      <a href={page.href} className="-m-2 block p-2 font-medium text-gray-900">
                         {page.name}
                       </a>
                     </div>
                   ))}
                 </div>
 
-                {/* Links */}
                 <TabGroup className="mt-2">
                   <div className="border-b border-gray-200">
                     <TabList className="-mb-px flex space-x-8 px-4">
@@ -238,9 +242,7 @@ export default function Example() {
                           key={category.name}
                           className={({ selected }) =>
                             classNames(
-                              selected
-                                ? "border-custom-red text-custom-red"
-                                : "border-transparent text-gray-900",
+                              selected ? "border-custom-red text-custom-red" : "border-transparent text-gray-900",
                               "flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium"
                             )
                           }
@@ -259,25 +261,9 @@ export default function Example() {
                       >
                         <div className="grid grid-cols-2 gap-x-4">
                           {category.featured.map((item) => (
-                            <div
-                              key={item.name}
-                              className="group relative text-sm"
-                            >
-                              {/* <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                                <img
-                                  src={item.imageSrc}
-                                  alt={item.imageAlt}
-                                  className="object-cover object-center"
-                                />
-                              </div> */}
-                              <a
-                                href={item.href}
-                                className="mt-6 block font-medium text-gray-900"
-                              >
-                                <span
-                                  className="absolute inset-0 z-10"
-                                  aria-hidden="true"
-                                />
+                            <div key={item.name} className="group relative text-sm">
+                              <a href={item.href} className="mt-6 block font-medium text-gray-900">
+                                <span className="absolute inset-0 z-10" aria-hidden="true" />
                                 {item.name}
                               </a>
                             </div>
@@ -294,27 +280,13 @@ export default function Example() {
                                 <li key={item.name} className="flow-root">
                                   <div className="flex flex-col">
                                     <div className="flex items-center">
-                                      <div
-                                        className="w-1 h-4 mr-2"
-                                        style={{
-                                          backgroundColor: item.color,
-                                        }}
-                                      ></div>
-                                      <a
-                                        href={item.href}
-                                        className="-m-2 block p-2 text-black"
-                                      >
+                                      <div className="w-1 h-4 mr-2" style={{ backgroundColor: item.color }}></div>
+                                      <a href={item.href} className="-m-2 block p-2 text-black">
                                         {item.name}
                                       </a>
                                     </div>
-                                    {/* Team logo */}
-
                                     {item.imageSrc && (
-                                      <img
-                                        src={item.imageSrc}
-                                        alt={item.name}
-                                        className="w-15 h-auto mt-4"
-                                      />
+                                      <img src={item.imageSrc} alt={item.name} className="w-15 h-auto mt-4" />
                                     )}
                                   </div>
                                 </li>
@@ -326,19 +298,6 @@ export default function Example() {
                     ))}
                   </TabPanels>
                 </TabGroup>
-
-                {/* <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-                  {navigation.page.map((page) => (
-                    <div key={page.name} className="flow-root">
-                      <a
-                        href={page.href}
-                        className="-m-2 block p-2 font-medium text-gray-900"
-                      >
-                        {page.name}
-                      </a>
-                    </div>
-                  ))}
-                </div> */}
 
                 <div className="border-t border-gray-200 px-4 py-6">
                   <div href="#" className="flex items-center">
@@ -362,58 +321,30 @@ export default function Example() {
         </Dialog>
       </Transition>
 
-      <header
-        className="relative bg-white py-2 border-b-2 border-b-custom-red"
-        style={{ zIndex: 23 }}
-      >
-        <nav
-          aria-label="Top"
-          className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
-          style={{ position: "relative", zIndex: "30" }}
-        >
+      <header className="relative bg-white py-2 border-b-2 border-b-custom-red" style={{ zIndex: 23 }}>
+        <nav aria-label="Top" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" style={{ position: "relative", zIndex: "30" }}>
           <div>
             <div className="flex h-16 items-center gap-8">
-              <button
-                type="button"
-                className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden"
-                onClick={() => setOpen(true)}
-              >
+              <button type="button" className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden" onClick={() => setOpen(true)}>
                 <span className="absolute -inset-0.5" />
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
               </button>
 
-              {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
                 <a href="#">
                   <img className="h-7 w-auto" src={logo} alt="" />
                 </a>
               </div>
 
-              {/* Flyout menus */}
               <PopoverGroup
                 className="hidden lg:ml-8 lg:block lg:self-stretch"
                 style={{ fontFamily: "TitilliumWeb-SemiBold", zIndex: "20" }}
               >
                 <div className="flex h-full space-x-8">
                   {navigation.pages.map((page) => (
-                    // <a
-                    //   key={page.name}
-                    //   href={page.href}
-                    //   className="flex items-center text-md font-medium text-black hover:text-custom-red"
-                    // >
-                    //   {page.name}{" "}
-
-                    // </a>
-                    <Link
-                      to={page.href}
-                      className="flex items-center text-md font-medium text-black hover:text-custom-red"
-                    >
+                    <Link key={page.name} to={page.href} className="flex items-center text-md font-medium text-black hover:text-custom-red">
                       {page.name}
-                      <img
-                        src={arrow}
-                        alt="dropdown"
-                        className="ml-1 w-6 h-auto opacity-0"
-                      />
+                      <img src={arrow} alt="dropdown" className="ml-1 w-6 h-auto opacity-0" />
                     </Link>
                   ))}
 
@@ -424,18 +355,16 @@ export default function Example() {
                           <div className="relative flex">
                             <PopoverButton
                               className={classNames(
-                                open
-                                  ? "border-white text-custom-red"
-                                  : "border-transparent text-black hover:text-custom-red",
+                                open ? "border-white text-custom-red" : "border-transparent text-black hover:text-custom-red",
                                 "relative z-10 -mb-px flex items-center border-b-2 pt-px text-md font-medium transition-colors duration-200 ease-out"
                               )}
                             >
-                              {category.name}{" "}
+                              {category.name}
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24"
-                                fill={open ? "#FF0000" : "currentColor"} // Change color on active state
-                                className="ml-1 w-6 h-auto transition-colors duration-200 ease-out" // Add transition for color change
+                                fill={open ? "#FF0000" : "currentColor"}
+                                className="ml-1 w-6 h-auto transition-colors duration-200 ease-out"
                               >
                                 <path d="M12 15.0006L7.75732 10.758L9.17154 9.34375L12 12.1722L14.8284 9.34375L16.2426 10.758L12 15.0006Z" />
                               </svg>
@@ -451,36 +380,18 @@ export default function Example() {
                             leaveTo="opacity-0"
                           >
                             <PopoverPanel className="absolute inset-x-0 top-full text-sm text-black">
-                              {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
-                              <div
-                                className="absolute inset-0 top-1/2 bg-white shadow"
-                                aria-hidden="true"
-                              />
-
+                              <div className="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
                               <div className="relative bg-custom-black mt-2">
                                 <div className="mx-auto max-w-7xl px-8">
                                   <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-16">
                                     <div className="col-start-2 grid grid-cols-2 gap-x-8">
                                       {category.featured.map((item) => (
-                                        <div
-                                          key={item.name}
-                                          className="group relative text-base sm:text-sm"
-                                        >
+                                        <div key={item.name} className="group relative text-base sm:text-sm">
                                           <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100">
-                                            <img
-                                              src={item.imageSrc}
-                                              alt={item.imageAlt}
-                                              className="object-cover object-center"
-                                            />
+                                            <img src={item.imageSrc} alt={item.imageAlt} className="object-cover object-center" />
                                           </div>
-                                          <a
-                                            href={item.href}
-                                            className="mt-6 block font-medium text-gray-900"
-                                          >
-                                            <span
-                                              className="absolute inset-0 z-10"
-                                              aria-hidden="true"
-                                            />
+                                          <a href={item.href} className="mt-6 block font-medium text-gray-900">
+                                            <span className="absolute inset-0 z-10" aria-hidden="true" />
                                             {item.name}
                                           </a>
                                         </div>
@@ -489,39 +400,16 @@ export default function Example() {
                                     <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
                                       {category.sections.map((section) => (
                                         <div key={section.name}>
-                                          <ul
-                                            role="list"
-                                            aria-labelledby={`${section.name}-heading`}
-                                            className="mt-0 space-y-6 sm:mt-0 sm:space-y-4"
-                                          >
+                                          <ul role="list" aria-labelledby={`${section.name}-heading`} className="mt-0 space-y-6 sm:mt-0 sm:space-y-4">
                                             {section.items.map((item) => (
-                                              <li
-                                                key={item.name}
-                                                className="flex items-center"
-                                              >
-                                                {/* Color box */}
-                                                <div
-                                                  className="w-1 h-4 mr-2"
-                                                  style={{
-                                                    backgroundColor: item.color,
-                                                  }}
-                                                ></div>
+                                              <li key={item.name} className="flex items-center">
+                                                <div className="w-1 h-4 mr-2" style={{ backgroundColor: item.color }}></div>
                                                 <div className="flex flex-col">
-                                                  {/* Team name */}
-                                                  <a
-                                                    href={item.href}
-                                                    className="text-white"
-                                                  >
+                                                  <a href={item.href} className="text-white">
                                                     {item.name}
                                                   </a>
-                                                  {/* Team logo */}
-
                                                   {item.imageSrc && (
-                                                    <img
-                                                      src={item.imageSrc}
-                                                      alt={item.name}
-                                                      className="w-21 h-auto mt-4"
-                                                    />
+                                                    <img src={item.imageSrc} alt={item.name} className="w-21 h-auto mt-4" />
                                                   )}
                                                 </div>
                                               </li>
@@ -539,36 +427,16 @@ export default function Example() {
                       )}
                     </Popover>
                   ))}
-
-                  {/* {navigation.page.map((page) => (
-                    <a
-                      key={page.name}
-                      href={page.href}
-                      className="flex items-center text-sm font-medium text-black hover:text-gray-800"
-                    >
-                      {page.name}
-                    </a>
-                  ))} */}
                 </div>
               </PopoverGroup>
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:ml-8 lg:flex">
-                  <a
-                    href="#"
-                    className="flex items-center text-gray-700 hover:text-gray-800"
-                  >
-                    <img
-                      src=""
-                      alt=""
-                      className="block h-auto w-5 flex-shrink-0"
-                    />
+                  <a href="#" className="flex items-center text-gray-700 hover:text-gray-800">
+                    <img src="" alt="" className="block h-auto w-5 flex-shrink-0" />
                     {user ? (
                       <>
-                        <span
-                          className="ml-3 inline-block text-md font-medium text-black py-2 px-4"
-                          style={{ fontFamily: "TitilliumWeb-SemiBold" }}
-                        >
+                        <span className="ml-3 inline-block text-md font-medium text-black py-2 px-4" style={{ fontFamily: "TitilliumWeb-SemiBold" }}>
                           <div className="flex items-center gap-2">
                             <img
                               src={racerIcon}
@@ -580,15 +448,9 @@ export default function Example() {
                                 border: "2px solid #E10600",
                               }}
                             />
-                            {/* {user.role === 1 ? (
-                              <Link to="/Admin"
-                               className="cursor-pointer">
-                                <span>{user.name}</span>
-                              </Link>
-                            ) : (
+                            <Link to={user.role === 1 ? "/admin" : ""}>
                               <span>{user.name}</span>
-                            )} */}
-                            <Link to={user.role == 1 ?  '/admin' : ''}><span>{user.name}</span></Link>
+                            </Link>
                           </div>
                         </span>
                         <button
