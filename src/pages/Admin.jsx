@@ -10,10 +10,8 @@ const Admin = () => {
 
   const navItems = [
     { name: 'Dashboard', icon: <FaTachometerAlt /> },
-    { name: 'Results', icon: <FaUsers /> },
+    { name: 'Results', icon: <FaList /> },
     { name: 'Users', icon: <FaUser /> },
-    { name: 'Schedule', icon: <FaCalendarAlt /> },
-    { name: 'Standings', icon: <FaList /> },
   ];
 
   const handleNavItemClick = (item) => {

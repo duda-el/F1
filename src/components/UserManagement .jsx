@@ -51,7 +51,7 @@ const UserManagement = () => {
 
   return (
     <div className="container mx-auto p-4" style={{ fontFamily: 'Titillium Web, sans-serif', color: '#E10600' }}>
-      <div className="flex gap-2 flex-wrap mb-6">
+      <div className="flex gap-10 flex-wrap mb-6">
         <form onSubmit={handleFormSubmit} className="flex flex-col w-full bg-gray-100 p-6 rounded-lg shadow-md mb-4 md:mb-0 md:mr-4">
           <input
             type="hidden"
@@ -66,7 +66,7 @@ const UserManagement = () => {
               name="name"
               value={form.name}
               onChange={handleInputChange}
-              className="mt-1 p-3 border border-gray-300 rounded-md w-full"
+              className="mt-1 p-3 border border-gray-300 rounded-md w-full  text-black"
               style={{ fontFamily: 'Titillium Web, sans-serif' }}
             />
           </div>
@@ -77,7 +77,7 @@ const UserManagement = () => {
               name="email"
               value={form.email}
               onChange={handleInputChange}
-              className="mt-1 p-3 border border-gray-300 rounded-md w-full"
+              className="mt-1 p-3 border border-gray-300 rounded-md w-full  text-black"
               style={{ fontFamily: 'Titillium Web, sans-serif' }}
             />
           </div>
@@ -88,7 +88,7 @@ const UserManagement = () => {
               name="role"
               value={form.role}
               onChange={handleInputChange}
-              className="mt-1 p-3 border border-gray-300 rounded-md w-full"
+              className="mt-1 p-3 border border-gray-300 rounded-md w-full  text-black"
               style={{ fontFamily: 'Titillium Web, sans-serif' }}
             />
           </div>
@@ -117,7 +117,7 @@ const UserManagement = () => {
                   <td className="border border-gray-300 p-2">
                     <button
                       onClick={() => handleEdit(user)}
-                      className="bg-yellow-500 text-white px-2 py-1 rounded-md mr-2"
+                      className="bg-black text-white px-2 py-1 rounded-md mr-2"
                     >
                       Edit
                     </button>
