@@ -28,13 +28,11 @@ const UserManagement = () => {
     try {
       if (form.id) {
         await axios.put('http://localhost/Backend/users.php', form);
-      } else {
-        await axios.post('http://localhost/Backend/users.php', form);
       }
       fetchUsers();
       setForm({ id: '', name: '', email: '', role: '' });
     } catch (error) {
-      console.error(`Error ${form.id ? 'editing' : 'adding'} user:`, error);
+      console.error(`Error editing user:`, error);
     }
   };
 
@@ -54,7 +52,7 @@ const UserManagement = () => {
   return (
     <div className="container mx-auto p-4" style={{ fontFamily: 'Titillium Web, sans-serif', color: '#E10600' }}>
       <div className="flex gap-2 flex-wrap mb-6">
-        <form onSubmit={handleFormSubmit} className="flex flex-col w-full  bg-gray-100 p-6 rounded-lg shadow-md mb-4 md:mb-0 md:mr-4">
+        <form onSubmit={handleFormSubmit} className="flex flex-col w-full bg-gray-100 p-6 rounded-lg shadow-md mb-4 md:mb-0 md:mr-4">
           <input
             type="hidden"
             name="id"
@@ -95,14 +93,14 @@ const UserManagement = () => {
             />
           </div>
           <button type="submit" className="bg-red-600 text-white px-4 py-2 rounded-md">
-            {form.id ? 'Edit' : 'Add'} User
+            Edit User
           </button>
         </form>
         <div className="flex-1 overflow-x-auto">
           <table className="w-full table-auto border-collapse border border-gray-300">
             <thead>
               <tr className="bg-gray-200">
-                <th className="border border-gray-300 p-2">ID</th>
+                <th className="border border-gray-300 p-2">Display ID</th>
                 <th className="border border-gray-300 p-2">Name</th>
                 <th className="border border-gray-300 p-2">Email</th>
                 <th className="border border-gray-300 p-2">Role</th>
@@ -110,9 +108,9 @@ const UserManagement = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
+              {users.map((user, index) => (
                 <tr key={user.id} className="hover:bg-gray-100 text-black">
-                  <td className="border border-gray-300 p-2">{user.id}</td>
+                  <td className="border border-gray-300 p-2">{index + 1}</td> {/* Display ID */}
                   <td className="border border-gray-300 p-2">{user.name}</td>
                   <td className="border border-gray-300 p-2">{user.email}</td>
                   <td className="border border-gray-300 p-2">{user.role}</td>
