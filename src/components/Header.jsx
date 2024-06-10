@@ -56,14 +56,18 @@ export default function Example() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const driverIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+  const driverIds = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+  ];
 
   useEffect(() => {
     const fetchDrivers = async () => {
       try {
         const fetchedDrivers = {};
         for (const id of driverIds) {
-          const response = await axios.get(`http://localhost/Backend/get_drivers.php?id=${id}`);
+          const response = await axios.get(
+            `http://localhost/Backend/get_drivers.php?id=${id}`
+          );
           fetchedDrivers[id] = response.data;
         }
         setDrivers(fetchedDrivers);
@@ -123,21 +127,21 @@ export default function Example() {
         ],
         sections: [
           {
-            items: driverIds.slice(0, 7).map(id => ({
+            items: driverIds.slice(0, 7).map((id) => ({
               name: drivers[id]?.name || "Loading...",
               href: `/driver/${id}`,
               color: drivers[id]?.color || "#000000",
             })),
           },
           {
-            items: driverIds.slice(7, 14).map(id => ({
+            items: driverIds.slice(7, 14).map((id) => ({
               name: drivers[id]?.name || "Loading...",
               href: `/driver/${id}`,
               color: drivers[id]?.color || "#000000",
             })),
           },
           {
-            items: driverIds.slice(14, 20).map(id => ({
+            items: driverIds.slice(14, 20).map((id) => ({
               name: drivers[id]?.name || "Loading...",
               href: `/driver/${id}`,
               color: drivers[id]?.color || "#000000",
@@ -189,7 +193,10 @@ export default function Example() {
   return (
     <div className="bg-white" style={{ fontFamily: "TitilliumWeb-Regular" }}>
       <SignInModal isOpen={isModalOpen} onClose={closeModal} />
-      <RegistrationModal isOpen={isRegistrationOpen} onClose={() => setIsRegistrationOpen(false)} />
+      <RegistrationModal
+        isOpen={isRegistrationOpen}
+        onClose={() => setIsRegistrationOpen(false)}
+      />
       <Transition show={open}>
         <Dialog className="relative z-40 lg:hidden" onClose={setOpen}>
           <TransitionChild
@@ -227,7 +234,10 @@ export default function Example() {
                 <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                   {navigation.pages.map((page) => (
                     <div key={page.name} className="flow-root">
-                      <a href={page.href} className="-m-2 block p-2 font-medium text-gray-900">
+                      <a
+                        href={page.href}
+                        className="-m-2 block p-2 font-medium text-gray-900"
+                      >
                         {page.name}
                       </a>
                     </div>
@@ -242,7 +252,9 @@ export default function Example() {
                           key={category.name}
                           className={({ selected }) =>
                             classNames(
-                              selected ? "border-custom-red text-custom-red" : "border-transparent text-gray-900",
+                              selected
+                                ? "border-custom-red text-custom-red"
+                                : "border-transparent text-gray-900",
                               "flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium"
                             )
                           }
@@ -261,9 +273,18 @@ export default function Example() {
                       >
                         <div className="grid grid-cols-2 gap-x-4">
                           {category.featured.map((item) => (
-                            <div key={item.name} className="group relative text-sm">
-                              <a href={item.href} className="mt-6 block font-medium text-gray-900">
-                                <span className="absolute inset-0 z-10" aria-hidden="true" />
+                            <div
+                              key={item.name}
+                              className="group relative text-sm"
+                            >
+                              <a
+                                href={item.href}
+                                className="mt-6 block font-medium text-gray-900"
+                              >
+                                <span
+                                  className="absolute inset-0 z-10"
+                                  aria-hidden="true"
+                                />
                                 {item.name}
                               </a>
                             </div>
@@ -280,13 +301,23 @@ export default function Example() {
                                 <li key={item.name} className="flow-root">
                                   <div className="flex flex-col">
                                     <div className="flex items-center">
-                                      <div className="w-1 h-4 mr-2" style={{ backgroundColor: item.color }}></div>
-                                      <a href={item.href} className="-m-2 block p-2 text-black">
+                                      <div
+                                        className="w-1 h-4 mr-2"
+                                        style={{ backgroundColor: item.color }}
+                                      ></div>
+                                      <a
+                                        href={item.href}
+                                        className="-m-2 block p-2 text-black"
+                                      >
                                         {item.name}
                                       </a>
                                     </div>
                                     {item.imageSrc && (
-                                      <img src={item.imageSrc} alt={item.name} className="w-15 h-auto mt-4" />
+                                      <img
+                                        src={item.imageSrc}
+                                        alt={item.name}
+                                        className="w-15 h-auto mt-4"
+                                      />
                                     )}
                                   </div>
                                 </li>
@@ -321,11 +352,22 @@ export default function Example() {
         </Dialog>
       </Transition>
 
-      <header className="relative bg-white py-2 border-b-2 border-b-custom-red" style={{ zIndex: 23 }}>
-        <nav aria-label="Top" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" style={{ position: "relative", zIndex: "30" }}>
+      <header
+        className="relative bg-white py-2 border-b-2 border-b-custom-red"
+        style={{ zIndex: 23 }}
+      >
+        <nav
+          aria-label="Top"
+          className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+          style={{ position: "relative", zIndex: "30" }}
+        >
           <div>
             <div className="flex h-16 items-center gap-8">
-              <button type="button" className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden" onClick={() => setOpen(true)}>
+              <button
+                type="button"
+                className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden"
+                onClick={() => setOpen(true)}
+              >
                 <span className="absolute -inset-0.5" />
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
               </button>
@@ -342,9 +384,17 @@ export default function Example() {
               >
                 <div className="flex h-full space-x-8">
                   {navigation.pages.map((page) => (
-                    <Link key={page.name} to={page.href} className="flex items-center text-md font-medium text-black hover:text-custom-red">
+                    <Link
+                      key={page.name}
+                      to={page.href}
+                      className="flex items-center text-md font-medium text-black hover:text-custom-red"
+                    >
                       {page.name}
-                      <img src={arrow} alt="dropdown" className="ml-1 w-6 h-auto opacity-0" />
+                      <img
+                        src={arrow}
+                        alt="dropdown"
+                        className="ml-1 w-6 h-auto opacity-0"
+                      />
                     </Link>
                   ))}
 
@@ -355,7 +405,9 @@ export default function Example() {
                           <div className="relative flex">
                             <PopoverButton
                               className={classNames(
-                                open ? "border-white text-custom-red" : "border-transparent text-black hover:text-custom-red",
+                                open
+                                  ? "border-white text-custom-red"
+                                  : "border-transparent text-black hover:text-custom-red",
                                 "relative z-10 -mb-px flex items-center border-b-2 pt-px text-md font-medium transition-colors duration-200 ease-out"
                               )}
                             >
@@ -380,18 +432,34 @@ export default function Example() {
                             leaveTo="opacity-0"
                           >
                             <PopoverPanel className="absolute inset-x-0 top-full text-sm text-black">
-                              <div className="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
+                              <div
+                                className="absolute inset-0 top-1/2 bg-white shadow"
+                                aria-hidden="true"
+                              />
                               <div className="relative bg-custom-black mt-2">
                                 <div className="mx-auto max-w-7xl px-8">
                                   <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-16">
                                     <div className="col-start-2 grid grid-cols-2 gap-x-8">
                                       {category.featured.map((item) => (
-                                        <div key={item.name} className="group relative text-base sm:text-sm">
+                                        <div
+                                          key={item.name}
+                                          className="group relative text-base sm:text-sm"
+                                        >
                                           <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100">
-                                            <img src={item.imageSrc} alt={item.imageAlt} className="object-cover object-center" />
+                                            <img
+                                              src={item.imageSrc}
+                                              alt={item.imageAlt}
+                                              className="object-cover object-center"
+                                            />
                                           </div>
-                                          <a href={item.href} className="mt-6 block font-medium text-gray-900">
-                                            <span className="absolute inset-0 z-10" aria-hidden="true" />
+                                          <a
+                                            href={item.href}
+                                            className="mt-6 block font-medium text-gray-900"
+                                          >
+                                            <span
+                                              className="absolute inset-0 z-10"
+                                              aria-hidden="true"
+                                            />
                                             {item.name}
                                           </a>
                                         </div>
@@ -400,16 +468,35 @@ export default function Example() {
                                     <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
                                       {category.sections.map((section) => (
                                         <div key={section.name}>
-                                          <ul role="list" aria-labelledby={`${section.name}-heading`} className="mt-0 space-y-6 sm:mt-0 sm:space-y-4">
+                                          <ul
+                                            role="list"
+                                            aria-labelledby={`${section.name}-heading`}
+                                            className="mt-0 space-y-6 sm:mt-0 sm:space-y-4"
+                                          >
                                             {section.items.map((item) => (
-                                              <li key={item.name} className="flex items-center">
-                                                <div className="w-1 h-4 mr-2" style={{ backgroundColor: item.color }}></div>
+                                              <li
+                                                key={item.name}
+                                                className="flex items-center"
+                                              >
+                                                <div
+                                                  className="w-1 h-4 mr-2"
+                                                  style={{
+                                                    backgroundColor: item.color,
+                                                  }}
+                                                ></div>
                                                 <div className="flex flex-col">
-                                                  <a href={item.href} className="text-white">
+                                                  <a
+                                                    href={item.href}
+                                                    className="text-white"
+                                                  >
                                                     {item.name}
                                                   </a>
                                                   {item.imageSrc && (
-                                                    <img src={item.imageSrc} alt={item.name} className="w-21 h-auto mt-4" />
+                                                    <img
+                                                      src={item.imageSrc}
+                                                      alt={item.name}
+                                                      className="w-21 h-auto mt-4"
+                                                    />
                                                   )}
                                                 </div>
                                               </li>
@@ -432,11 +519,21 @@ export default function Example() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:ml-8 lg:flex">
-                  <a href="#" className="flex items-center text-gray-700 hover:text-gray-800">
-                    <img src="" alt="" className="block h-auto w-5 flex-shrink-0" />
+                  <a
+                    href="#"
+                    className="flex items-center text-gray-700 hover:text-gray-800"
+                  >
+                    <img
+                      src=""
+                      alt=""
+                      className="block h-auto w-5 flex-shrink-0"
+                    />
                     {user ? (
                       <>
-                        <span className="ml-3 inline-block text-md font-medium text-black py-2 px-4" style={{ fontFamily: "TitilliumWeb-SemiBold" }}>
+                        <span
+                          className="ml-3 inline-block text-md font-medium text-black py-2 px-4"
+                          style={{ fontFamily: "TitilliumWeb-SemiBold" }}
+                        >
                           <div className="flex items-center gap-2">
                             <img
                               src={racerIcon}
@@ -448,7 +545,15 @@ export default function Example() {
                                 border: "2px solid #E10600",
                               }}
                             />
-                            <Link to={user.role === 1 ? "/admin" : ""}>
+                            {/* {user.role === 1 ? (
+                              <Link to="/Admin"
+                               className="cursor-pointer">
+                                <span>{user.name}</span>
+                              </Link>
+                            ) : (
+                              <span>{user.name}</span>
+                            )} */}
+                            <Link to={user.role == 1 ? "/admin" : ""}>
                               <span>{user.name}</span>
                             </Link>
                           </div>
