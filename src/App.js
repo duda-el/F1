@@ -5,6 +5,7 @@ import HomePage from './pages/index';
 import Results from './pages/Results';
 import Admin from './pages/Admin'
 import F1TireLoader from './components/Loader'; // Import the loader component
+import DriverCard from "./components/DriverCard"
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -32,6 +33,7 @@ function App() {
           <Route path='/' element={<HomePage/>}/>
           <Route path='/result' element={<Results/>}/>
           <Route path='/admin' element={<Admin/>}/>
+          <Route path="/driver/:id" element={<DriverCard />} />
         </Routes>
       )}
     </div>

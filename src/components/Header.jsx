@@ -125,21 +125,21 @@ export default function Example() {
           {
             items: driverIds.slice(0, 7).map(id => ({
               name: drivers[id]?.name || "Loading...",
-              href: "#",
-              color: drivers[id]?.color || "#000000", // Default to black if color not found
+              href: `/driver/${id}`,
+              color: drivers[id]?.color || "#000000",
             })),
           },
           {
             items: driverIds.slice(7, 14).map(id => ({
               name: drivers[id]?.name || "Loading...",
-              href: "#",
+              href: `/driver/${id}`,
               color: drivers[id]?.color || "#000000",
             })),
           },
           {
             items: driverIds.slice(14, 20).map(id => ({
               name: drivers[id]?.name || "Loading...",
-              href: "#",
+              href: `/driver/${id}`,
               color: drivers[id]?.color || "#000000",
             })),
           },
