@@ -52,33 +52,96 @@ export default function Example() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
   const [user, setUser] = useState(null);
-  const [drivers, setDrivers] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [drivers2, setDrivers2] = useState({});
+  const [loading2, setLoading2] = useState(true);
   const [error, setError] = useState(null);
+  const [drivers, setDrivers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const fetchDrivers = async () => {
+      if (searchTerm === "") {
+        setDrivers([]);
+        return;
+      }
+
+      setLoading(true);
+      try {
+        const response = await axios.post(
+          "http://localhost/Backend/search_drivers.php",
+          { searchTerm }
+        );
+        setDrivers(response.data);
+      } catch (error) {
+        console.error("Error fetching drivers:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const delayDebounceFn = setTimeout(() => {
+      fetchDrivers();
+    }, 300);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm]);
+
+  const renderSearchResults = () => {
+    if (loading) return <div>Loading...</div>;
+    if (!drivers.length) return <div>No results found</div>;
+
+    return (
+      <ul className="space-y-2 text-white">
+        {drivers.map((driver) => (
+          <li
+            key={driver.id}
+            className="flex items-center bg-custom-black p-2 rounded-lg"
+          >
+            <img
+              src={driver.img}
+              alt={driver.name}
+              className="h-14 w-14 rounded"
+            />
+            <div className="ml-4">
+              <p
+                className="text-lg font-bold"
+                style={{ fontFamily: "formula1" }}
+              >
+                {driver.name}
+              </p>
+              <p className="text-sm">{driver.team}</p>
+              <p className="text-sm">{driver.country}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    );
+  };
 
   const driverIds = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   ];
 
   useEffect(() => {
-    const fetchDrivers = async () => {
+    const fetchDrivers2 = async () => {
       try {
-        const fetchedDrivers = {};
+        const fetchedDrivers2 = {};
         for (const id of driverIds) {
           const response = await axios.get(
             `http://localhost/Backend/get_drivers.php?id=${id}`
           );
-          fetchedDrivers[id] = response.data;
+          fetchedDrivers2[id] = response.data;
         }
-        setDrivers(fetchedDrivers);
+        setDrivers2(fetchedDrivers2);
       } catch (error) {
         setError(error);
       } finally {
-        setLoading(false);
+        setLoading2(false);
       }
     };
 
-    fetchDrivers();
+    fetchDrivers2();
   }, []);
 
   useEffect(() => {
@@ -103,7 +166,7 @@ export default function Example() {
     setIsModalOpen(true);
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading2) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   const navigation = {
@@ -128,23 +191,23 @@ export default function Example() {
         sections: [
           {
             items: driverIds.slice(0, 7).map((id) => ({
-              name: drivers[id]?.name || "Loading...",
+              name: drivers2[id]?.name || "Loading...",
               href: `/driver/${id}`,
-              color: drivers[id]?.color || "#000000",
+              color: drivers2[id]?.color || "#000000",
             })),
           },
           {
             items: driverIds.slice(7, 14).map((id) => ({
-              name: drivers[id]?.name || "Loading...",
+              name: drivers2[id]?.name || "Loading...",
               href: `/driver/${id}`,
-              color: drivers[id]?.color || "#000000",
+              color: drivers2[id]?.color || "#000000",
             })),
           },
           {
             items: driverIds.slice(14, 20).map((id) => ({
-              name: drivers[id]?.name || "Loading...",
+              name: drivers2[id]?.name || "Loading...",
               href: `/driver/${id}`,
-              color: drivers[id]?.color || "#000000",
+              color: drivers2[id]?.color || "#000000",
             })),
           },
         ],
@@ -519,6 +582,21 @@ export default function Example() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:ml-8 lg:flex">
+                <div className="relative ml-10">
+                    <input
+                      type="text"
+                      className="block w-full p-2 border border-gray-300 rounded"
+                      placeholder="Search drivers"
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    <button
+                      className="absolute right-0 top-0 mt-2.5  mr-2"
+                      onClick={searchTerm}
+                    >
+                      <MagnifyingGlassIcon className="h-5 w-5 text-gray-500" />
+                    </button>
+                  </div>
                   <a
                     href="#"
                     className="flex items-center text-gray-700 hover:text-gray-800"
@@ -590,6 +668,12 @@ export default function Example() {
               </div>
             </div>
           </div>
+          {/* Search Results */}
+          {searchTerm && (
+            <div className="absolute w-full bg-white shadow-lg p-4 mt-1">
+              {renderSearchResults()}
+            </div>
+          )}
         </nav>
       </header>
     </div>
