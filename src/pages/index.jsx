@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Leclerc from "../assets/images/leclerc2.jpg";
 import "./HomePage.css";
 import F1Schedule from "../components/F1Schedule/F1Schedule";
+import VoteDriverOfTheYear from "../components/VoteDriverOfTheYear";
 
 export default function HomePage() {
   return (
@@ -21,6 +22,7 @@ export default function HomePage() {
       {/* <div style={{width: "100%", height: "auto", marginTop: "20px", display: "flex", flexDirection: "column", alignItems: "center", gap: "20px"}}> */}
         {/* <h2 style={{fontFamily: "formula1-bold", fontSize: "30px"}}>2024 F1® Schedule</h2> */}
         <F1Schedule />
+        <VoteDriverOfTheYear/>
       {/* </div> */}
     </div>
   );
