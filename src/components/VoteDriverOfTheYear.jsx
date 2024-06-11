@@ -50,7 +50,7 @@ const DriverRanking = () => {
   const selectedDriver = drivers.find(driver => driver.driver_id === parseInt(selectedDriverId));
 
   return (
-    <div className="bg-white p-4 shadow-lg">
+    <div className="bg-white p-4 shadow-lg py-8">
       <div className="flex items-center mb-4">
         <label htmlFor="driver-select" className="block text-custom-black text-lg font-bold mr-10" style={{ fontFamily: 'formula1-bold' }}>Select a Driver</label>
         <select
